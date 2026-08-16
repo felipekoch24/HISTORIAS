@@ -6,9 +6,21 @@
         "descricao": "Não importa o mundo, o destino ou o tempo. Eu sempre encontraria você."
     },
     {
-        "titulo": "Capítulo 2: A Outra Realidade",
-        "src": "outro_video.mp4",
-        "citacao": "Em qualquer linha temporal, a resposta sempre foi a mesma: nós dois.",
-        "descricao": "Mesmo quando o cenário muda, a essência permanece."
+        "titulo": "Capítulo 2: Primeira Parte",
+        "src": "01.mp4",
+        "citacao": "Cada detalhe da nossa trajetória nos trouxe até aqui.",
+        "descricao": "O começo de tudo o que construímos juntos."
+    },
+    {
+        "titulo": "Capítulo 3: Segunda Parte",
+        "src": "02.mp4",
+        "citacao": "Continuamos escrevendo as nossas próprias regras.",
+        "descricao": "Nenhum obstáculo foi capaz de mudar o rumo."
+    },
+    {
+        "titulo": "Capítulo 4: Terceira Parte",
+        "src": "03.mp4",
+        "citacao": "O destino final é apenas o começo de uma nova fase.",
+        "descricao": "Olhando para trás e vendo o quanto evoluímos."
     }
 ]
