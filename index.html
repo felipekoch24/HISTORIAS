@@ -38,6 +38,13 @@
             font-size: 1rem;
         }
 
+        #feed-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .story-container {
             max-width: 600px;
             width: 100%;
@@ -93,23 +100,39 @@
         <p>Em um mundo de aparências, escolhemos ser reais.</p>
     </header>
 
-    <div class="story-container">
-        <!-- Espaço do Vídeo -->
-        <div class="video-box">
-            <video controls autoplay loop muted>
-                <source src="Universo.mp4" type="video/mp4">
-                Seu navegador não suporta vídeos.
-            </video>
-        </div>
+    <!-- Onde os vídeos vão aparecer sozinhos -->
+    <div id="feed-container"></div>
 
-        <div class="story-content">
-            <h2>Capítulo Único: O Multiverso</h2>
-            <blockquote>
-                "Eu subiria cada andar, atravessaria cada reino e enfrentaria qualquer destino para encontrar você. Nem o multiverso poderia nos separar."
-            </blockquote>
-            <p>Não importa o mundo, o destino ou o tempo. Eu sempre encontraria você.</p>
-        </div>
-    </div>
+    <script>
+        // Lê o arquivo JSON e monta a página automaticamente
+        fetch('videos.json')
+            .then(response => response.json())
+            .then(videos => {
+                const container = document.getElementById('feed-container');
+                
+                videos.forEach(item => {
+                    const storyDiv = document.createElement('div');
+                    storyDiv.className = 'story-container';
+                    
+                    storyDiv.innerHTML = `
+                        <div class="video-box">
+                            <video controls autoplay loop muted>
+                                <source src="${item.src}" type="video/mp4">
+                                Seu navegador não suporta vídeos.
+                            </video>
+                        </div>
+                        <div class="story-content">
+                            <h2>${item.titulo}</h2>
+                            <blockquote>"${item.citacao}"</blockquote>
+                            <p>${item.descricao}</p>
+                        </div>
+                    `;
+                    
+                    container.appendChild(storyDiv);
+                });
+            })
+            .catch(error => console.error('Erro ao carregar os vídeos:', error));
+    </script>
 
 </body>
 </html>
