@@ -100,7 +100,7 @@
         <p>Em um mundo de aparências, escolhemos ser reais.</p>
     </header>
 
-    <!-- Onde os vídeos vão aparecer sozinhos -->
+    <!-- Onde os vídeos vão aparecer -->
     <div id="feed-container"></div>
 
     <script>
@@ -116,7 +116,7 @@
                     
                     storyDiv.innerHTML = `
                         <div class="video-box">
-                            <video controls autoplay loop muted>
+                            <video controls loop playsinline>
                                 <source src="${item.src}" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
