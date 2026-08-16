@@ -1,0 +1,14 @@
+[
+    {
+        "titulo": "Capítulo 1: O Multiverso",
+        "src": "Universo.mp4",
+        "citacao": "Eu subiria cada andar, atravessaria cada reino e enfrentaria qualquer destino para encontrar você. Nem o multiverso poderia nos separar.",
+        "descricao": "Não importa o mundo, o destino ou o tempo. Eu sempre encontraria você."
+    },
+    {
+        "titulo": "Capítulo 2: A Outra Realidade",
+        "src": "outro_video.mp4",
+        "citacao": "Em qualquer linha temporal, a resposta sempre foi a mesma: nós dois.",
+        "descricao": "Mesmo quando o cenário muda, a essência permanece."
+    }
+]
