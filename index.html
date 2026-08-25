@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nossa Própria História - Multiverso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Rayssa ❤️ - Nossos Mundos</title>
     <style>
         * {
             margin: 0;
@@ -18,24 +18,27 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
+            min-height: 100vh;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
         header h1 {
-            font-size: 2rem;
+            font-size: 1.7rem;
             letter-spacing: 2px;
             color: #d4af37;
             margin-bottom: 10px;
         }
 
         header p {
-            color: #888;
-            font-size: 1rem;
+            color: #aaa;
+            font-size: 0.9rem;
+            padding: 0 10px;
         }
 
         #feed-container {
@@ -46,14 +49,15 @@
         }
 
         .story-container {
-            max-width: 600px;
+            max-width: 500px;
             width: 100%;
             background: #14141c;
             border: 1px solid #2a2a38;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            animation: slideUp 0.8s ease-out;
         }
 
         .video-box {
@@ -61,35 +65,75 @@
             background: #000;
             display: flex;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .video-box video {
             width: 100%;
-            max-height: 700px;
-            object-fit: contain;
+            max-height: 600px;
+            object-fit: cover;
+            display: block;
         }
 
         .story-content {
-            padding: 25px;
+            padding: 20px;
             text-align: center;
         }
 
         .story-content h2 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
         .story-content blockquote {
             font-style: italic;
             color: #d4af37;
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
             border-left: 3px solid #d4af37;
-            padding-left: 15px;
-            margin: 20px 0;
+            padding-left: 12px;
+            margin: 15px 0;
             text-align: left;
+        }
+
+        .story-content p {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .like-btn {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .like-btn:hover, .like-btn.liked {
+            background: #d4af37;
+            color: #0b0b0f;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -97,14 +141,13 @@
 
     <header>
         <h1>QUATRO MUNDOS, UM SÓ AMOR</h1>
-        <p>Em um mundo de aparências, escolhemos ser reais.</p>
+        <p>Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
     </header>
 
-    <!-- Onde os vídeos vão aparecer -->
+    <!-- Onde os vídeos vão aparecer dinamicamente -->
     <div id="feed-container"></div>
 
     <script>
-        // Lê o arquivo JSON e monta a página automaticamente
         fetch('videos.json')
             .then(response => response.json())
             .then(videos => {
@@ -116,7 +159,7 @@
                     
                     storyDiv.innerHTML = `
                         <div class="video-box">
-                            <video controls loop playsinline>
+                            <video controls loop playsinline preload="metadata">
                                 <source src="${item.src}" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -125,13 +168,37 @@
                             <h2>${item.titulo}</h2>
                             <blockquote>"${item.citacao}"</blockquote>
                             <p>${item.descricao}</p>
+                            <button class="like-btn" onclick="toggleLike(this)">
+                                <span>❤️</span> Curtir
+                            </button>
                         </div>
                     `;
                     
                     container.appendChild(storyDiv);
                 });
+
+                // Lógica para tocar apenas um vídeo por vez no site inteiro
+                const allVideos = document.querySelectorAll('video');
+                allVideos.forEach(video => {
+                    video.addEventListener('play', () => {
+                        allVideos.forEach(otherVideo => {
+                            if (otherVideo !== video) {
+                                otherVideo.pause();
+                            }
+                        });
+                    });
+                });
             })
             .catch(error => console.error('Erro ao carregar os vídeos:', error));
+
+        function toggleLike(btn) {
+            btn.classList.toggle('liked');
+            if (btn.classList.contains('liked')) {
+                btn.innerHTML = '<span>❤️</span> Te amo!';
+            } else {
+                btn.innerHTML = '<span>❤️</span> Curtir';
+            }
+        }
     </script>
 
 </body>
