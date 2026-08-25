@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Rayssa ❤️ - Nossos Mundos</title>
+
+    <!-- Configurações para transformar em "App" no iPhone (Safari) -->
+    <link rel="apple-touch-icon" href="icone.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LOVE RAY">
+
     <style>
         * {
             margin: 0;
@@ -177,7 +184,7 @@
                     container.appendChild(storyDiv);
                 });
 
-                // Lógica para tocar apenas um vídeo por vez no site inteiro
+                // Tocar apenas um vídeo por vez e manter em loop infinito
                 const allVideos = document.querySelectorAll('video');
                 allVideos.forEach(video => {
                     video.addEventListener('play', () => {
