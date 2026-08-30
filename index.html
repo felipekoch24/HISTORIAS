@@ -133,6 +133,64 @@
             transform: scale(1.05);
         }
 
+        /* Estilos da Seção de Feedback / WhatsApp */
+        .feedback-section {
+            max-width: 500px;
+            width: 100%;
+            background: #14141c;
+            border: 1px solid #2a2a38;
+            border-radius: 16px;
+            padding: 25px 20px;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .feedback-section h3 {
+            font-size: 1.2rem;
+            color: #d4af37;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .feedback-section > p {
+            color: #aaa;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-zap {
+            background: transparent;
+            border: 2px solid #25d366;
+            color: #25d366;
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: bold;
+        }
+
+        .btn-zap:hover {
+            background: #25d366;
+            color: #0b0b0f;
+            transform: scale(1.02);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -153,6 +211,27 @@
 
     <!-- Onde os vídeos vão aparecer dinamicamente -->
     <div id="feed-container"></div>
+
+    <!-- Seção de Interação via WhatsApp -->
+    <section class="feedback-section">
+        <h3>Deixe sua mensagem</h3>
+        <p>Como você quer mandar isso para mim?</p>
+        
+        <div class="whatsapp-buttons">
+            <a href="https://wa.me/5551995830380?text=Opa,%20vim%20dar%20uma%20sugestão%20de%20melhoria%20no%20site!" target="_blank" class="btn-zap">
+                💡 Sugestão de melhoria
+            </a>
+            <a href="https://wa.me/5551995830380?text=Olha,%20tenho%20uma%20reclamação%20sobre..." target="_blank" class="btn-zap">
+                ⚠️ Reclamação
+            </a>
+            <a href="https://wa.me/5551995830380?text=Passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
+                💬 Feedback
+            </a>
+            <a href="https://wa.me/5551995830380?text=Cara,%20parabéns,%20o%20site%20ficou%20muito%20bom!%20Elogio%20merecido." target="_blank" class="btn-zap">
+                ❤️ Elogio
+            </a>
+        </div>
+    </section>
 
     <script>
         fetch('videos.json')
