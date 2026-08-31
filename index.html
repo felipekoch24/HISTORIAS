@@ -31,7 +31,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             animation: fadeIn 1.5s ease-in-out;
         }
 
@@ -46,6 +46,33 @@
             color: #aaa;
             font-size: 0.9rem;
             padding: 0 10px;
+        }
+
+        /* Barra de Ações Rápidas no Topo */
+        .top-action-bar {
+            max-width: 500px;
+            width: 100%;
+            background: #14141c;
+            border: 1px solid #2a2a38;
+            border-radius: 16px;
+            padding: 18px 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        .top-action-bar p {
+            color: #aaa;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .top-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         #feed-container {
@@ -171,17 +198,17 @@
             background: transparent;
             border: 2px solid #25d366;
             color: #25d366;
-            padding: 12px 16px;
+            padding: 10px 14px;
             border-radius: 12px;
             cursor: pointer;
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             text-decoration: none;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             font-weight: bold;
         }
 
@@ -209,25 +236,44 @@
         <p>Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
     </header>
 
+    <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO -->
+    <div class="top-action-bar">
+        <p>Deixe sua mensagem direto por aqui:</p>
+        <div class="top-buttons-grid whatsapp-buttons">
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="btn-zap">
+                💡 Sugestão
+            </a>
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="btn-zap">
+                ⚠️ Reclamação
+            </a>
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="btn-zap">
+                ❤️ Elogio
+            </a>
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
+                💬 Feedback
+            </a>
+        </div>
+    </div>
+
     <!-- Onde os vídeos vão aparecer dinamicamente -->
     <div id="feed-container"></div>
 
-    <!-- Seção de Interação via WhatsApp -->
+    <!-- Seção de Interação via WhatsApp (Rodapé) -->
     <section class="feedback-section">
         <h3>Deixe sua mensagem</h3>
         <p>Como você quer mandar isso para mim?</p>
         
         <div class="whatsapp-buttons">
-            <a href="https://wa.me/5551995830380?text=Opa,%20vim%20dar%20uma%20sugestão%20de%20melhoria%20no%20site!" target="_blank" class="btn-zap">
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="btn-zap">
                 💡 Sugestão de melhoria
             </a>
-            <a href="https://wa.me/5551995830380?text=Olha,%20tenho%20uma%20reclamação%20sobre..." target="_blank" class="btn-zap">
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="btn-zap">
                 ⚠️ Reclamação
             </a>
-            <a href="https://wa.me/5551995830380?text=Passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
                 💬 Feedback
             </a>
-            <a href="https://wa.me/5551995830380?text=Cara,%20parabéns,%20o%20site%20ficou%20muito%20bom!%20Elogio%20merecido." target="_blank" class="btn-zap">
+            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="btn-zap">
                 ❤️ Elogio
             </a>
         </div>
