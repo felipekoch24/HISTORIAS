@@ -19,8 +19,8 @@
         }
 
         body {
-            background-color: #0b0b0f;
-            color: #f0f0f0;
+            background-color: #1a0f14; /* Fundo escuro com toque rosado/vinho */
+            color: #fce4ec;
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             flex-direction: column;
@@ -38,32 +38,79 @@
         header h1 {
             font-size: 1.7rem;
             letter-spacing: 2px;
-            color: #d4af37;
+            color: #ff4081; /* Rosa vibrante */
             margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(255, 64, 129, 0.4);
         }
 
         header p {
-            color: #aaa;
+            color: #f8bbd0;
             font-size: 0.9rem;
             padding: 0 10px;
+        }
+
+        /* --- SISTEMA DE ABAS --- */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            max-width: 500px;
+            width: 100%;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #2c1621;
+            color: #f8bbd0;
+            border: 1px solid #51253c;
+            padding: 10px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .tab-btn:hover {
+            color: #fff;
+            border-color: #ff4081;
+        }
+
+        .tab-btn.active {
+            background-color: #ff4081;
+            color: #1a0f14;
+            border-color: #ff4081;
+            box-shadow: 0 0 12px rgba(255, 64, 129, 0.6);
+        }
+
+        .tab-content {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tab-content.active {
+            display: flex;
         }
 
         /* Barra de Ações Rápidas no Topo */
         .top-action-bar {
             max-width: 500px;
             width: 100%;
-            background: #14141c;
-            border: 1px solid #2a2a38;
+            background: #2c1621;
+            border: 1px solid #51253c;
             border-radius: 16px;
             padding: 18px 15px;
             text-align: center;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            animation: fadeIn 1.2s ease-in-out;
         }
 
         .top-action-bar p {
-            color: #aaa;
+            color: #f8bbd0;
             font-size: 0.8rem;
             margin-bottom: 12px;
             letter-spacing: 0.5px;
@@ -75,7 +122,7 @@
             gap: 10px;
         }
 
-        #feed-container {
+        #feed-container, #recent-container {
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -85,8 +132,8 @@
         .story-container {
             max-width: 500px;
             width: 100%;
-            background: #14141c;
-            border: 1px solid #2a2a38;
+            background: #2c1621;
+            border: 1px solid #51253c;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
@@ -124,25 +171,25 @@
 
         .story-content blockquote {
             font-style: italic;
-            color: #d4af37;
+            color: #ff80ab;
             font-size: 1rem;
             line-height: 1.5;
-            border-left: 3px solid #d4af37;
+            border-left: 3px solid #ff4081;
             padding-left: 12px;
             margin: 15px 0;
             text-align: left;
         }
 
         .story-content p {
-            color: #ccc;
+            color: #f8bbd0;
             font-size: 0.9rem;
             margin-bottom: 15px;
         }
 
         .like-btn {
             background: transparent;
-            border: 2px solid #d4af37;
-            color: #d4af37;
+            border: 2px solid #ff4081;
+            color: #ff4081;
             padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
@@ -155,36 +202,39 @@
         }
 
         .like-btn:hover, .like-btn.liked {
-            background: #d4af37;
-            color: #0b0b0f;
+            background: #ff4081;
+            color: #1a0f14;
             transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
         }
 
-        /* Estilos da Seção de Feedback / WhatsApp */
-        .feedback-section {
+        /* --- SEÇÃO SUPORTE / DESENVOLVEDOR --- */
+        .dev-section {
             max-width: 500px;
             width: 100%;
-            background: #14141c;
-            border: 1px solid #2a2a38;
+            background: #2c1621;
+            border: 1px solid #51253c;
             border-radius: 16px;
             padding: 25px 20px;
             text-align: center;
-            margin-top: 10px;
-            margin-bottom: 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             animation: slideUp 0.8s ease-out;
         }
 
-        .feedback-section h3 {
-            font-size: 1.2rem;
-            color: #d4af37;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+        .dev-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff4081;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(255, 64, 129, 0.4);
         }
 
-        .feedback-section > p {
-            color: #aaa;
-            font-size: 0.85rem;
+        .dev-section p {
+            color: #fce4ec;
+            font-size: 0.95rem;
+            line-height: 1.5;
             margin-bottom: 20px;
         }
 
@@ -214,7 +264,7 @@
 
         .btn-zap:hover {
             background: #25d366;
-            color: #0b0b0f;
+            color: #1a0f14;
             transform: scale(1.02);
         }
 
@@ -236,77 +286,84 @@
         <p>Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
     </header>
 
-    <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO -->
-    <div class="top-action-bar">
-        <p>Deixe sua mensagem direto por aqui:</p>
-        <div class="top-buttons-grid whatsapp-buttons">
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="btn-zap">
-                💡 Sugestão
-            </a>
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="btn-zap">
-                ⚠️ Reclamação
-            </a>
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="btn-zap">
-                ❤️ Elogio
-            </a>
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
-                💬 Feedback
-            </a>
-        </div>
+    <!-- SISTEMA DE ABAS -->
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="mudarAba('todos', this)">TODOS</button>
+        <button class="tab-btn" onclick="mudarAba('recentes', this)">RECENTES</button>
+        <button class="tab-btn" onclick="mudarAba('suporte', this)">SUPORTE</button>
     </div>
 
-    <!-- Onde os vídeos vão aparecer dinamicamente -->
-    <div id="feed-container"></div>
-
-    <!-- Seção de Interação via WhatsApp (Rodapé) -->
-    <section class="feedback-section">
-        <h3>Deixe sua mensagem</h3>
-        <p>Como você quer mandar isso para mim?</p>
-        
-        <div class="whatsapp-buttons">
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="btn-zap">
-                💡 Sugestão de melhoria
-            </a>
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="btn-zap">
-                ⚠️ Reclamação
-            </a>
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
-                💬 Feedback
-            </a>
-            <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="btn-zap">
-                ❤️ Elogio
-            </a>
+    <!-- ABA 1: TODOS -->
+    <div id="aba-todos" class="tab-content active">
+        <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO -->
+        <div class="top-action-bar">
+            <p>Deixe sua mensagem direto por aqui:</p>
+            <div class="top-buttons-grid whatsapp-buttons">
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="btn-zap">
+                    💡 Sugestão
+                </a>
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="btn-zap">
+                    ⚠️ Reclamação
+                </a>
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="btn-zap">
+                    ❤️ Elogio
+                </a>
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
+                    💬 Feedback
+                </a>
+            </div>
         </div>
-    </section>
+
+        <div id="feed-container"></div>
+    </div>
+
+    <!-- ABA 2: RECENTES -->
+    <div id="aba-recentes" class="tab-content">
+        <div id="recent-container"></div>
+    </div>
+
+    <!-- ABA 3: SUPORTE -->
+    <div id="aba-suporte" class="tab-content">
+        <section class="dev-section">
+            <picture>
+                <source srcset="dev.png" type="image/png">
+                <source srcset="dev.jpeg" type="image/jpeg">
+                <img src="dev.png" alt="Felipe" class="dev-avatar">
+            </picture>
+            <p>Oi, meu amor, aqui é seu desenvolvedor, Felipe, teu ruivo, espero que esteja gostando, fico com coração quentinho de saber que é útil pra você, eu te amo ❤️<br><br>Qualquer sugestão, ou qualquer outra coisa, até desabafar, só clicar no botão e entrar em contato comigo, bjs 😘👑❤️</p>
+            
+            <div class="whatsapp-buttons">
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20falar%20com%20o%20meu%20ruivo!" target="_blank" class="btn-zap">
+                    💬 Falar com o Desenvolvedor ❤️
+                </a>
+            </div>
+        </section>
+    </div>
 
     <script>
+        function mudarAba(aba, elementoBtn) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            elementoBtn.classList.add('active');
+            document.getElementById('aba-' + aba).classList.add('active');
+        }
+
         fetch('videos.json')
             .then(response => response.json())
             .then(videos => {
                 const container = document.getElementById('feed-container');
+                const recentContainer = document.getElementById('recent-container');
                 
+                // Renderizar TODOS
                 videos.forEach(item => {
-                    const storyDiv = document.createElement('div');
-                    storyDiv.className = 'story-container';
-                    
-                    storyDiv.innerHTML = `
-                        <div class="video-box">
-                            <video controls loop playsinline preload="metadata">
-                                <source src="${item.src}" type="video/mp4">
-                                Seu navegador não suporta vídeos.
-                            </video>
-                        </div>
-                        <div class="story-content">
-                            <h2>${item.titulo}</h2>
-                            <blockquote>"${item.citacao}"</blockquote>
-                            <p>${item.descricao}</p>
-                            <button class="like-btn" onclick="toggleLike(this)">
-                                <span>❤️</span> Curtir
-                            </button>
-                        </div>
-                    `;
-                    
-                    container.appendChild(storyDiv);
+                    container.appendChild(criarCardVideo(item));
+                });
+
+                // Renderizar RECENTES (últimos 2 adicionados)
+                const ultimosVideos = [...videos].reverse().slice(0, 2);
+                ultimosVideos.forEach(item => {
+                    recentContainer.appendChild(criarCardVideo(item));
                 });
 
                 // Tocar apenas um vídeo por vez e manter em loop infinito
@@ -322,6 +379,29 @@
                 });
             })
             .catch(error => console.error('Erro ao carregar os vídeos:', error));
+
+        function criarCardVideo(item) {
+            const storyDiv = document.createElement('div');
+            storyDiv.className = 'story-container';
+            
+            storyDiv.innerHTML = `
+                <div class="video-box">
+                    <video controls loop playsinline preload="metadata">
+                        <source src="${item.src}" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+                <div class="story-content">
+                    <h2>${item.titulo}</h2>
+                    <blockquote>"${item.citacao}"</blockquote>
+                    <p>${item.descricao}</p>
+                    <button class="like-btn" onclick="toggleLike(this)">
+                        <span>❤️</span> Curtir
+                    </button>
+                </div>
+            `;
+            return storyDiv;
+        }
 
         function toggleLike(btn) {
             btn.classList.toggle('liked');
