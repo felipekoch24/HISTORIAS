@@ -22,7 +22,7 @@ header {
 }
 
 header h1 {
-    font-size: 2rem; /* Aumentado para facilitar leitura */
+    font-size: 2.3rem; /* Bem grande */
     letter-spacing: 2px;
     color: #ff4081; /* Rosa vibrante */
     margin-bottom: 12px;
@@ -31,19 +31,19 @@ header h1 {
 
 header p {
     color: #f8bbd0;
-    font-size: 1.05rem; /* Aumentado */
+    font-size: 1.2rem; /* Bem legível */
     padding: 0 10px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* --- SISTEMA DE ABAS --- */
 .tabs-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     max-width: 500px;
     width: 100%;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     flex-wrap: wrap;
 }
 
@@ -51,12 +51,12 @@ header p {
     background-color: #2c1621;
     color: #f8bbd0;
     border: 1px solid #51253c;
-    padding: 12px 18px;
-    border-radius: 20px;
+    padding: 14px 22px;
+    border-radius: 25px;
     cursor: pointer;
     font-family: inherit;
     font-weight: bold;
-    font-size: 0.95rem; /* Aumentado */
+    font-size: 1.1rem; /* Botões maiores */
     transition: all 0.2s;
 }
 
@@ -90,7 +90,7 @@ header p {
     background: #2c1621;
     border: 1px solid #51253c;
     border-radius: 16px;
-    padding: 20px 15px;
+    padding: 22px 18px;
     text-align: center;
     margin-bottom: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
@@ -98,15 +98,15 @@ header p {
 
 .top-action-bar p {
     color: #f8bbd0;
-    font-size: 0.95rem; /* Aumentado */
-    margin-bottom: 15px;
+    font-size: 1.15rem; /* Texto de instrução maior */
+    margin-bottom: 18px;
     letter-spacing: 0.5px;
 }
 
 .top-buttons-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
 }
 
 #feed-container, #recent-container {
@@ -145,55 +145,56 @@ header p {
 }
 
 .story-content {
-    padding: 22px;
+    padding: 25px;
     text-align: center;
 }
 
 .story-content h2 {
-    font-size: 1.25rem; /* Aumentado */
+    font-size: 1.45rem; /* Títulos dos vídeos bem destacados */
     color: #fff;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     letter-spacing: 1px;
 }
 
 .story-content blockquote {
     font-style: italic;
     color: #ff80ab;
-    font-size: 1.05rem; /* Aumentado */
+    font-size: 1.2rem; /* Citações grandes */
     line-height: 1.6;
-    border-left: 3px solid #ff4081;
-    padding-left: 12px;
-    margin: 15px 0;
+    border-left: 4px solid #ff4081;
+    padding-left: 15px;
+    margin: 18px 0;
     text-align: left;
 }
 
 .story-content p {
     color: #f8bbd0;
-    font-size: 1rem; /* Aumentado */
-    margin-bottom: 18px;
-    line-height: 1.5;
+    font-size: 1.15rem; /* Descrições grandes */
+    margin-bottom: 22px;
+    line-height: 1.6;
 }
 
 .like-btn {
     background: transparent;
     border: 2px solid #ff4081;
     color: #ff4081;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 12px 24px;
+    border-radius: 25px;
     cursor: pointer;
     font-family: inherit;
-    font-size: 1rem; /* Aumentado */
+    font-size: 1.15rem; /* Botão curtir maior */
     transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    font-weight: bold;
 }
 
 .like-btn:hover, .like-btn.liked {
     background: #ff4081;
     color: #1a0f14;
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(255, 64, 129, 0.5);
+    box-shadow: 0 0 12px rgba(255, 64, 129, 0.5);
 }
 
 /* --- SEÇÃO SUPORTE / DESENVOLVEDOR --- */
@@ -203,21 +204,21 @@ header p {
     background: #2c1621;
     border: 1px solid #51253c;
     border-radius: 16px;
-    padding: 30px 20px;
+    padding: 35px 22px;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.8);
     animation: slideUp 0.8s ease-out;
 }
 
 .dev-avatar {
-    width: 110px; /* Um pouco maior de início */
-    height: 110px;
+    width: 130px; /* Foto maior */
+    height: 130px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ff4081;
-    margin-bottom: 15px;
-    box-shadow: 0 0 15px rgba(255, 64, 129, 0.4);
-    cursor: pointer; /* Mostra que é clicável */
+    margin-bottom: 20px;
+    box-shadow: 0 0 18px rgba(255, 64, 129, 0.4);
+    cursor: pointer;
     transition: transform 0.2s ease;
 }
 
@@ -227,32 +228,32 @@ header p {
 
 .dev-section p {
     color: #fce4ec;
-    font-size: 1.05rem; /* Aumentado para facilitar leitura */
-    line-height: 1.6;
-    margin-bottom: 25px;
+    font-size: 1.2rem; /* Texto do suporte bem grande */
+    line-height: 1.7;
+    margin-bottom: 30px;
 }
 
 .whatsapp-buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
 }
 
 .btn-zap {
     background: transparent;
     border: 2px solid #25d366;
     color: #25d366;
-    padding: 12px 16px;
-    border-radius: 12px;
+    padding: 14px 18px;
+    border-radius: 14px;
     cursor: pointer;
     font-family: inherit;
-    font-size: 0.95rem; /* Aumentado */
+    font-size: 1.1rem; /* Botões de contato maiores */
     text-decoration: none;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     font-weight: bold;
 }
 
@@ -288,15 +289,15 @@ header p {
 }
 
 .close-modal {
-    margin-top: 20px;
+    margin-top: 25px;
     background: #ff4081;
     color: #1a0f14;
     border: none;
-    padding: 10px 25px;
-    border-radius: 20px;
+    padding: 12px 30px;
+    border-radius: 25px;
     font-family: inherit;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.15rem;
     cursor: pointer;
 }
 
