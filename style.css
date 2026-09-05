@@ -43,7 +43,7 @@ header p {
     gap: 12px;
     max-width: 500px;
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
@@ -81,6 +81,31 @@ header p {
 
 .tab-content.active {
     display: flex;
+}
+
+/* --- BARRA DE PESQUISA --- */
+.search-container {
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 25px;
+    border: 1px solid #51253c;
+    background: #2c1621;
+    color: #fce4ec;
+    font-size: 1.05rem;
+    font-family: inherit;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: border-color 0.3s;
+}
+
+.search-container input:focus {
+    border-color: #ff4081;
 }
 
 /* Barra de Ações Rápidas no Topo */
@@ -261,6 +286,33 @@ header p {
     background: #25d366;
     color: #1a0f14;
     transform: scale(1.02);
+}
+
+/* --- BOTÃO FLUTUANTE DE VOLTAR AO TOPO --- */
+#btnTopo {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #ff4081;
+    color: #1a0f14;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    display: none; /* Começa oculto */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(255, 64, 129, 0.5);
+    z-index: 998;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#btnTopo:hover {
+    transform: scale(1.1);
+    background-color: #ff79a9;
 }
 
 /* --- MODAL DA FOTO GRANDE --- */
