@@ -33,7 +33,7 @@
         
         <!-- BARRA DE PESQUISA -->
         <div class="search-container">
-            <input type="text" id="inputBusca" placeholder="Pesquisar capítulos ou momentos..." onkeyup="filtrarVideos()">
+            <input type="text" id="inputBusca" placeholder="Pesquisar capítulos ou momentos..." onkeyup="filtrarVideos()" onkeydown="verificarEnter(event)">
         </div>
 
         <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO -->
@@ -147,6 +147,13 @@
                     card.style.display = 'none';
                 }
             });
+        }
+
+        // Função para fechar o teclado ao pressionar Enter na busca
+        function verificarEnter(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('inputBusca').blur(); // Tira o foco do input, sumindo com o teclado
+            }
         }
 
         fetch('videos.json')
