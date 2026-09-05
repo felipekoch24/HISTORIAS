@@ -30,6 +30,12 @@
 
     <!-- ABA 1: TODOS -->
     <div id="aba-todos" class="tab-content active">
+        
+        <!-- BARRA DE PESQUISA -->
+        <div class="search-container">
+            <input type="text" id="inputBusca" placeholder="Pesquisar capítulos ou momentos..." onkeyup="filtrarVideos()">
+        </div>
+
         <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO -->
         <div class="top-action-bar">
             <p>Deixe sua mensagem direto por aqui:</p>
@@ -75,6 +81,9 @@
         </section>
     </div>
 
+    <!-- BOTÃO FLUTUANTE DE VOLTAR AO TOPO -->
+    <button id="btnTopo" onclick="voltarAoTopo()" title="Voltar ao topo">⬆</button>
+
     <!-- MODAL DE TELA CHEIA PARA A FOTO -->
     <div id="modalFoto" class="image-modal" onclick="fecharFotoGrande()">
         <img id="imgModal" src="" alt="Foto Ampliada">
@@ -88,6 +97,9 @@
 
             elementoBtn.classList.add('active');
             document.getElementById('aba-' + aba).classList.add('active');
+            
+            // Rola para o topo ao trocar de aba se preferir
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Funções para ampliar a foto do suporte
@@ -100,6 +112,41 @@
 
         function fecharFotoGrande() {
             document.getElementById('modalFoto').style.display = 'none';
+        }
+
+        // Botão de Voltar ao Topo e Controle de Rolagem
+        const btnTopo = document.getElementById('btnTopo');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                btnTopo.style.display = 'flex';
+            } else {
+                btnTopo.style.display = 'none';
+            }
+        });
+
+        function voltarAoTopo() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Barra de Pesquisa de Capítulos
+        function filtrarVideos() {
+            const termo = document.getElementById('inputBusca').value.toLowerCase();
+            const cards = document.querySelectorAll('#feed-container .story-container');
+
+            cards.forEach(card => {
+                const titulo = card.querySelector('h2').innerText.toLowerCase();
+                const citacao = card.querySelector('blockquote').innerText.toLowerCase();
+                const descricao = card.querySelector('p').innerText.toLowerCase();
+                
+                if (titulo.includes(termo) || citacao.includes(termo) || descricao.includes(termo)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
         fetch('videos.json')
