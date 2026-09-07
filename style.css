@@ -1,4 +1,8 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     background-color: #1a0f14;
@@ -11,7 +15,7 @@ body {
     min-height: 100vh;
 }
 
-/* --- NOVO CABEÇALHO IMERSIVO (TOPO.PNG) --- */
+/* --- CABEÇALHO COM A IMAGEM TOPO.PNG --- */
 .topo-completo {
     width: 100%;
     max-width: 500px;
@@ -20,7 +24,7 @@ body {
 
 .topo-banner {
     width: 100%;
-    height: 280px; /* Ajuste a altura conforme sua imagem */
+    height: 240px;
     background-size: cover;
     background-position: center;
     position: relative;
@@ -32,47 +36,47 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 15px 20px;
     background: linear-gradient(to top, rgba(26,15,20,0.95), transparent);
     text-align: left;
 }
 
 .topo-overlay h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: #ff80ab;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     text-shadow: 0 0 10px rgba(255, 128, 171, 0.7);
     letter-spacing: 1px;
 }
 
 .topo-overlay .sub-frase {
     color: #fce4ec;
-    font-size: 1rem;
-    margin-bottom: 5px;
-    max-width: 70%; /* Para não bater na frase lateral */
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    max-width: 65%;
 }
 
 .topo-overlay .frase-lateral {
     position: absolute;
     right: 15px;
-    top: 20px;
-    width: 100px;
+    top: 15px;
+    width: 110px;
     color: #ff80ab;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     line-height: 1.2;
     text-align: right;
     font-weight: bold;
 }
 
-/* --- SISTEMA DE ABAS REVISADO --- */
+/* --- SISTEMA DE ABAS --- */
 .tabs-container {
     display: flex;
     justify-content: center;
     gap: 8px;
     max-width: 500px;
     width: 100%;
-    margin-bottom: 30px;
-    padding: 0 10px;
+    margin-bottom: 25px;
+    padding: 0 15px;
 }
 
 .tab-btn {
@@ -80,12 +84,12 @@ body {
     background-color: #2c1621;
     color: #f8bbd0;
     border: 1px solid #51253c;
-    padding: 12px 5px;
-    border-radius: 12px;
+    padding: 12px 6px;
+    border-radius: 14px;
     cursor: pointer;
     font-family: inherit;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: all 0.3s;
     display: flex;
     flex-direction: column;
@@ -93,13 +97,12 @@ body {
     gap: 4px;
 }
 
-.tab-btn .tab-icon { font-size: 1.2rem; }
-.tab-btn .tab-sub { font-size: 0.7rem; opacity: 0.7; font-weight: normal; }
+.tab-btn .tab-icon { font-size: 1.1rem; }
+.tab-btn .tab-sub { font-size: 0.65rem; opacity: 0.7; font-weight: normal; }
 
 .tab-btn:hover {
     color: #fff;
     border-color: #ff4081;
-    box-shadow: 0 0 10px rgba(255, 64, 129, 0.4);
 }
 
 .tab-btn.active {
@@ -132,5 +135,344 @@ body {
 }
 
 .search-wrapper input {
-    width: 10
-    
+    width: 100%;
+    padding: 14px 20px 14px 45px;
+    border-radius: 25px;
+    border: 1px solid #51253c;
+    background: #2c1621;
+    color: #fce4ec;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: border-color 0.3s;
+}
+
+.search-wrapper input:focus {
+    border-color: #ff4081;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+}
+
+/* --- CARDS DE INTERAÇÃO (WHATSAPP) --- */
+.top-action-bar {
+    max-width: 500px;
+    width: 100%;
+    padding: 0 15px;
+    margin-bottom: 25px;
+}
+
+.action-title {
+    color: #f8bbd0;
+    font-size: 1.05rem;
+    margin-bottom: 12px;
+    font-weight: bold;
+}
+
+.action-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.action-card {
+    background: #2c1621;
+    border-radius: 14px;
+    padding: 15px 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.action-card.pink-border {
+    border: 1px solid #ff4081;
+}
+
+.action-card.green-border {
+    border: 1px solid #25d366;
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 64, 129, 0.3);
+}
+
+.card-icon {
+    font-size: 1.5rem;
+}
+
+.card-text {
+    flex: 1;
+}
+
+.card-text h3 {
+    color: #fce4ec;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+.card-text p {
+    color: #f8bbd0;
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.arrow {
+    color: #ff4081;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* --- FEED DE VÍDEOS --- */
+#feed-container, #recent-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.story-container {
+    width: 100%;
+    background: #2c1621;
+    border: 1px solid #51253c;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    margin-bottom: 25px;
+    animation: slideUp 0.6s ease-out;
+}
+
+.video-box {
+    width: 100%;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.video-box video {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+.story-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.story-content h2 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.story-content blockquote {
+    font-style: italic;
+    color: #ff80ab;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    border-left: 3px solid #ff4081;
+    padding-left: 12px;
+    margin: 15px 0;
+    text-align: left;
+}
+
+.story-content p {
+    color: #f8bbd0;
+    font-size: 1rem;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.like-btn {
+    background: transparent;
+    border: 2px solid #ff4081;
+    color: #ff4081;
+    padding: 10px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+}
+
+.like-btn:hover, .like-btn.liked {
+    background: #ff4081;
+    color: #1a0f14;
+    box-shadow: 0 0 12px rgba(255, 64, 129, 0.5);
+}
+
+/* --- SEÇÃO SUPORTE --- */
+.dev-section {
+    max-width: 500px;
+    width: calc(100% - 30px);
+    background: #2c1621;
+    border: 1px solid #51253c;
+    border-radius: 16px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.dev-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ff4081;
+    margin-bottom: 18px;
+    box-shadow: 0 0 18px rgba(255, 64, 129, 0.4);
+    cursor: pointer;
+}
+
+.dev-section p {
+    color: #fce4ec;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.whatsapp-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-zap {
+    background: transparent;
+    border: 2px solid #25d366;
+    color: #25d366;
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.btn-zap:hover {
+    background: #25d366;
+    color: #1a0f14;
+}
+
+.easter-egg-trigger {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #f8bbd0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    opacity: 0.75;
+}
+
+.easter-egg-trigger:hover {
+    color: #ff4081;
+    opacity: 1;
+}
+
+/* --- BOTÃO TOPO & MODAIS --- */
+#btnTopo {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: #ff4081;
+    color: #1a0f14;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 20px rgba(255, 64, 129, 0.5);
+    z-index: 998;
+}
+
+.image-modal, .easter-egg-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.92);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.image-modal img, .easter-egg-content img {
+    max-width: 90%;
+    max-height: 60vh;
+    border-radius: 12px;
+    border: 2px solid #ff4081;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.easter-egg-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.easter-egg-text {
+    background: #2c1621;
+    border: 1px solid #ff4081;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+    color: #fce4ec;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.close-modal, .close-easter-egg {
+    background: #ff4081;
+    color: #1a0f14;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+                                 }
+        
