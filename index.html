@@ -16,41 +16,85 @@
 </head>
 <body>
 
-    <header>
-        <h1>QUATRO MUNDOS, UM SÓ AMOR</h1>
-        <p>Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
+    <!-- CABEÇALHO IMERSIVO (NOVA VERSÃO) -->
+    <header class="topo-imparavel">
+        <img src="topo.png" alt="Casais de Sagas Românticas" class="topo-img">
+        <div class="topo-overlay">
+            <h1>QUATRO MUNDOS, Um Só Amor ❤️</h1>
+            <p class="sub-frase">Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
+            <p class="frase-lateral">Você faz todos os mundos valerem a pena. ✨</p>
+        </div>
     </header>
 
-    <!-- SISTEMA DE ABAS -->
+    <!-- SISTEMA DE ABAS (NOVA VERSÃO ELEGANTE) -->
     <div class="tabs-container">
-        <button class="tab-btn active" onclick="mudarAba('todos', this)">TODOS</button>
-        <button class="tab-btn" onclick="mudarAba('recentes', this)">RECENTES</button>
-        <button class="tab-btn" onclick="mudarAba('suporte', this)">SUPORTE</button>
+        <button class="tab-btn active" onclick="mudarAba('todos', this)">
+            <span class="tab-icon">🔲</span>
+            TODOS
+            <span class="tab-sub">Todos os mundos</span>
+            <span class="love-dot"></span>
+        </button>
+        <button class="tab-btn" onclick="mudarAba('recentes', this)">
+            <span class="tab-icon">🕒</span>
+            RECENTES
+            <span class="tab-sub">Últimos adicionados</span>
+            <span class="love-dot"></span>
+        </button>
+        <button class="tab-btn" onclick="mudarAba('suporte', this)">
+            <span class="tab-icon">🎧</span>
+            SUPORTE
+            <span class="tab-sub">Fale com o DEV</span>
+            <span class="love-dot"></span>
+        </button>
     </div>
 
     <!-- ABA 1: TODOS -->
     <div id="aba-todos" class="tab-content active">
         
-        <!-- BARRA DE PESQUISA -->
+        <!-- BARRA DE PESQUISA (NOVA VERSÃO) -->
         <div class="search-container">
-            <input type="text" id="inputBusca" placeholder="Pesquisar capítulos ou momentos..." onkeyup="filtrarVideos()" onkeydown="verificarEnter(event)">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="inputBusca" placeholder="Pesquisar capítulos ou momentos..." onkeyup="filtrarVideos()" onkeydown="verificarEnter(event)">
+                <span class="filter-icon">🎛️</span>
+            </div>
         </div>
 
-        <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO -->
+        <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO (NOVO LAYOUT EM CARDS) -->
         <div class="top-action-bar">
-            <p>Deixe sua mensagem direto por aqui:</p>
-            <div class="top-buttons-grid whatsapp-buttons">
-                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="btn-zap">
-                    💡 Sugestão
+            <p class="action-title">❤️ Deixe sua mensagem direto por aqui:</p>
+            <div class="action-cards-grid">
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20sugerir%20uma%20melhoria%20em%20%3A%20" target="_blank" class="action-card pink-border">
+                    <span class="card-icon">💡</span>
+                    <div class="card-text">
+                        <h3>Sugestão</h3>
+                        <p>Ajude a melhorar</p>
+                    </div>
+                    <span class="arrow">›</span>
                 </a>
-                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="btn-zap">
-                    ⚠️ Reclamação
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20reclamar%20sobre%20%3A%20" target="_blank" class="action-card green-border">
+                    <span class="card-icon">⚠️</span>
+                    <div class="card-text">
+                        <h3>Reclamação</h3>
+                        <p>Algo não está certo?</p>
+                    </div>
+                    <span class="arrow">›</span>
                 </a>
-                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="btn-zap">
-                    ❤️ Elogio
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20gostaria%20de%20elogiar%20sobre%20%3A%20" target="_blank" class="action-card pink-border">
+                    <span class="card-icon">❤️</span>
+                    <div class="card-text">
+                        <h3>Elogio</h3>
+                        <p>Isso nos motiva</p>
+                    </div>
+                    <span class="arrow">›</span>
                 </a>
-                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="btn-zap">
-                    💬 Feedback
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20do%20apk%20RAY%20LOVE%20passando%20para%20deixar%20um%20feedback!" target="_blank" class="action-card green-border">
+                    <span class="card-icon">💬</span>
+                    <div class="card-text">
+                        <h3>Feedback</h3>
+                        <p>Conte sua experiência</p>
+                    </div>
+                    <span class="arrow">›</span>
                 </a>
             </div>
         </div>
@@ -117,7 +161,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Funções para ampliar a foto do suporte
         function abrirFotoGrande(src) {
             const modal = document.getElementById('modalFoto');
             const img = document.getElementById('imgModal');
@@ -129,7 +172,6 @@
             document.getElementById('modalFoto').style.display = 'none';
         }
 
-        // Funções do Easter Egg do Cartão Lendário
         function abrirEasterEgg() {
             document.getElementById('modalEasterEgg').style.display = 'flex';
         }
@@ -138,7 +180,6 @@
             document.getElementById('modalEasterEgg').style.display = 'none';
         }
 
-        // Botão de Voltar ao Topo e Controle de Rolagem
         const btnTopo = document.getElementById('btnTopo');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -155,7 +196,6 @@
             });
         }
 
-        // Barra de Pesquisa de Capítulos
         function filtrarVideos() {
             const termo = document.getElementById('inputBusca').value.toLowerCase();
             const cards = document.querySelectorAll('#feed-container .story-container');
@@ -173,7 +213,6 @@
             });
         }
 
-        // Função para fechar o teclado ao pressionar Enter na busca
         function verificarEnter(event) {
             if (event.key === 'Enter') {
                 document.getElementById('inputBusca').blur();
