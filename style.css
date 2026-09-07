@@ -15,57 +15,18 @@ body {
     min-height: 100vh;
 }
 
-/* --- CABEÇALHO COM A IMAGEM TOPO.PNG --- */
+/* --- TOPO 1 (IMAGEM COMPLETA COM OS CASAIS) --- */
 .topo-completo {
     width: 100%;
     max-width: 500px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
-.topo-banner {
+.topo-banner-img {
     width: 100%;
-    height: 240px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
+    height: auto;
+    display: block;
     border-bottom: 2px solid #ff4081;
-}
-
-.topo-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px 20px;
-    background: linear-gradient(to top, rgba(26,15,20,0.95), transparent);
-    text-align: left;
-}
-
-.topo-overlay h1 {
-    font-size: 1.5rem;
-    color: #ff80ab;
-    margin-bottom: 5px;
-    text-shadow: 0 0 10px rgba(255, 128, 171, 0.7);
-    letter-spacing: 1px;
-}
-
-.topo-overlay .sub-frase {
-    color: #fce4ec;
-    font-size: 0.9rem;
-    margin-bottom: 0;
-    max-width: 65%;
-}
-
-.topo-overlay .frase-lateral {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    width: 110px;
-    color: #ff80ab;
-    font-size: 0.75rem;
-    line-height: 1.2;
-    text-align: right;
-    font-weight: bold;
 }
 
 /* --- SISTEMA DE ABAS --- */
@@ -173,6 +134,7 @@ body {
     font-size: 1.05rem;
     margin-bottom: 12px;
     font-weight: bold;
+    text-align: center;
 }
 
 .action-cards-grid {
@@ -193,43 +155,35 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-.action-card.pink-border {
-    border: 1px solid #ff4081;
-}
-
-.action-card.green-border {
-    border: 1px solid #25d366;
-}
+.action-card.pink-border { border: 1px solid #ff4081; }
+.action-card.green-border { border: 1px solid #25d366; }
 
 .action-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(255, 64, 129, 0.3);
 }
 
-.card-icon {
-    font-size: 1.5rem;
+.card-icon { font-size: 1.5rem; }
+.card-text { flex: 1; }
+.card-text h3 { color: #fce4ec; font-size: 0.95rem; margin-bottom: 2px; }
+.card-text p { color: #f8bbd0; font-size: 0.75rem; opacity: 0.8; }
+.arrow { color: #ff4081; font-size: 1.2rem; font-weight: bold; }
+
+/* --- TOPO 2 (IMAGEM DOS SÍMBOLOS DOS MUNDOS) --- */
+.separador-mundos {
+    width: 100%;
+    max-width: 500px;
+    padding: 0 15px;
+    margin-bottom: 25px;
 }
 
-.card-text {
-    flex: 1;
-}
-
-.card-text h3 {
-    color: #fce4ec;
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-}
-
-.card-text p {
-    color: #f8bbd0;
-    font-size: 0.75rem;
-    opacity: 0.8;
-}
-
-.arrow {
-    color: #ff4081;
-    font-size: 1.2rem;
-    font-weight: bold;
+.topo-banner-sinais {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+    border: 1px solid #51253c;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 /* --- FEED DE VÍDEOS --- */
@@ -474,5 +428,4 @@ body {
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
-                                 }
-        
+}
