@@ -4,63 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LOVE RAY ❤️</title>
-
-    <!-- Configurações para transformar em "App" no iPhone (Safari) -->
-    <link rel="apple-touch-icon" href="icone.png">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="LOVE RAY">
-
-    <!-- Importando o arquivo de estilos separado -->
+    <!-- Importando o arquivo de estilos -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- CABEÇALHO IMERSIVO (NOVA VERSÃO) -->
-    <header class="topo-imparavel">
-        <img src="topo.png" alt="Casais de Sagas Românticas" class="topo-img">
-        <div class="topo-overlay">
-            <h1>QUATRO MUNDOS, Um Só Amor ❤️</h1>
-            <p class="sub-frase">Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
-            <p class="frase-lateral">Você faz todos os mundos valerem a pena. ✨</p>
+    <!-- CABEÇALHO IMERSIVO (NOVO DESIGN COMPLETO) -->
+    <header class="topo-completo">
+        <!-- A imagem 'topo.png' deve estar na mesma pasta -->
+        <div class="topo-banner" style="background-image: url('topo.png');">
+            <div class="topo-overlay">
+                <h1>QUATRO MUNDOS, Um Só Amor</h1>
+                <p class="sub-frase">Em um mundo de aparências, escolhemos ser reais. Feito para você, Rayssa ❤️</p>
+                <p class="frase-lateral">Você faz todos os mundos valerem a pena. ✨</p>
+            </div>
         </div>
     </header>
 
-    <!-- SISTEMA DE ABAS (NOVA VERSÃO ELEGANTE) -->
+    <!-- SISTEMA DE ABAS (DESIGN ELEGANTE) -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="mudarAba('todos', this)">
             <span class="tab-icon">🔲</span>
             TODOS
             <span class="tab-sub">Todos os mundos</span>
-            <span class="love-dot"></span>
         </button>
         <button class="tab-btn" onclick="mudarAba('recentes', this)">
             <span class="tab-icon">🕒</span>
             RECENTES
             <span class="tab-sub">Últimos adicionados</span>
-            <span class="love-dot"></span>
         </button>
         <button class="tab-btn" onclick="mudarAba('suporte', this)">
             <span class="tab-icon">🎧</span>
             SUPORTE
             <span class="tab-sub">Fale com o DEV</span>
-            <span class="love-dot"></span>
         </button>
     </div>
 
-    <!-- ABA 1: TODOS -->
+    <!-- ABA 1: TODOS (Onde ficam os vídeos) -->
     <div id="aba-todos" class="tab-content active">
         
-        <!-- BARRA DE PESQUISA (NOVA VERSÃO) -->
+        <!-- BARRA DE PESQUISA -->
         <div class="search-container">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="inputBusca" placeholder="Pesquisar capítulos ou momentos..." onkeyup="filtrarVideos()" onkeydown="verificarEnter(event)">
-                <span class="filter-icon">🎛️</span>
             </div>
         </div>
 
-        <!-- BARRA DE INTERAÇÃO DIRETO NO TOPO (NOVO LAYOUT EM CARDS) -->
+        <!-- CARDS DE INTERAÇÃO -->
         <div class="top-action-bar">
             <p class="action-title">❤️ Deixe sua mensagem direto por aqui:</p>
             <div class="action-cards-grid">
@@ -99,6 +90,7 @@
             </div>
         </div>
 
+        <!-- ONDE OS VÍDEOS APARECEM AUTOMATICAMENTE -->
         <div id="feed-container"></div>
     </div>
 
@@ -110,175 +102,68 @@
     <!-- ABA 3: SUPORTE -->
     <div id="aba-suporte" class="tab-content">
         <section class="dev-section">
-            <picture>
-                <source srcset="dev.png" type="image/png">
-                <source srcset="dev.jpeg" type="image/jpeg">
-                <img src="dev.png" alt="Felipe" class="dev-avatar" onclick="abrirFotoGrande(this.src)">
-            </picture>
+            <img src="dev.png" alt="Felipe" class="dev-avatar" onclick="abrirFotoGrande(this.src)">
             <p>Oi, meu amor, aqui é seu desenvolvedor, Felipe, teu ruivo, espero que esteja gostando, fico com coração quentinho de saber que é útil pra você, eu te amo ❤️<br><br>Qualquer sugestão, ou qualquer outra coisa, até desabafar, só clicar no botão e entrar em contato comigo, bjs 😘👑❤️</p>
-            
             <div class="whatsapp-buttons">
-                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20falar%20com%20o%20meu%20ruivo!" target="_blank" class="btn-zap">
-                    💬 Falar com o Desenvolvedor ❤️
-                </a>
+                <a href="https://wa.me/5551995830380?text=Oiii%20meu%20amor,%20vim%20falar%20com%20o%20meu%20ruivo!" target="_blank" class="btn-zap">💬 Falar com o Desenvolvedor ❤️</a>
             </div>
-
-            <!-- EASTER EGG SECRETO NO SUPORTE -->
-            <div class="easter-egg-trigger" onclick="abrirEasterEgg()">
-                SERÁ QUE SE TOCAR AQUI ACONTECE ALGO? 🫪🤔
-            </div>
+            <!-- EASTER EGG -->
+            <div class="easter-egg-trigger" onclick="abrirEasterEgg()">SERÁ QUE SE TOCAR AQUI ACONTECE ALGO? 🫪🤔</div>
         </section>
     </div>
 
-    <!-- BOTÃO FLUTUANTE DE VOLTAR AO TOPO -->
-    <button id="btnTopo" onclick="voltarAoTopo()" title="Voltar ao topo">⬆</button>
+    <!-- BOTÃO FLUTUANTE TOPO -->
+    <button id="btnTopo" onclick="voltarAoTopo()">⬆</button>
 
-    <!-- MODAL DE TELA CHEIA PARA A FOTO -->
+    <!-- MODAIS -->
     <div id="modalFoto" class="image-modal" onclick="fecharFotoGrande()">
-        <img id="imgModal" src="" alt="Foto Ampliada">
+        <img id="imgModal" src="">
         <button class="close-modal">Fechar</button>
     </div>
-
-    <!-- MODAL DO EASTER EGG (CARTA LENDÁRIA) -->
     <div id="modalEasterEgg" class="easter-egg-modal">
         <div class="easter-egg-content">
-            <img src="carta-lendaria.png" alt="Carta Lendária Rayssa e Cachorra">
-            <div class="easter-egg-text">
-                <p>TU é curiosa né meu AMOR kkk<br>Mas que bom que CLICOU<br><br>Descobriu meu SEGREDO👻<br>Espero que tenha gostado da SURPRESA KK 🫂😘</p>
-            </div>
+            <img src="carta-lendaria.png">
+            <div class="easter-egg-text">TU é curiosa né meu AMOR kkk<br>Mas que bom que CLICOU<br><br>Descobriu meu SEGREDO👻<br>Espero que tenha gostado da SURPRESA KK 🫂😘</div>
             <button class="close-easter-egg" onclick="fecharEasterEgg()">Fechar Cartão</button>
         </div>
     </div>
 
+    <!-- JAVASCRIPT -->
     <script>
-        function mudarAba(aba, elementoBtn) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
-            elementoBtn.classList.add('active');
+        function mudarAba(aba, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
             document.getElementById('aba-' + aba).classList.add('active');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo(0, 0);
         }
-
-        function abrirFotoGrande(src) {
-            const modal = document.getElementById('modalFoto');
-            const img = document.getElementById('imgModal');
-            img.src = src;
-            modal.style.display = 'flex';
-        }
-
-        function fecharFotoGrande() {
-            document.getElementById('modalFoto').style.display = 'none';
-        }
-
-        function abrirEasterEgg() {
-            document.getElementById('modalEasterEgg').style.display = 'flex';
-        }
-
-        function fecharEasterEgg() {
-            document.getElementById('modalEasterEgg').style.display = 'none';
-        }
-
+        function abrirFotoGrande(src) { const m = document.getElementById('modalFoto'); m.style.display = 'flex'; document.getElementById('imgModal').src = src; }
+        function fecharFotoGrande() { document.getElementById('modalFoto').style.display = 'none'; }
+        function abrirEasterEgg() { document.getElementById('modalEasterEgg').style.display = 'flex'; }
+        function fecharEasterEgg() { document.getElementById('modalEasterEgg').style.display = 'none'; }
         const btnTopo = document.getElementById('btnTopo');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                btnTopo.style.display = 'flex';
-            } else {
-                btnTopo.style.display = 'none';
-            }
-        });
-
-        function voltarAoTopo() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
+        window.addEventListener('scroll', () => btnTopo.style.display = window.scrollY > 300 ? 'flex' : 'none');
+        function voltarAoTopo() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         function filtrarVideos() {
             const termo = document.getElementById('inputBusca').value.toLowerCase();
-            const cards = document.querySelectorAll('#feed-container .story-container');
-
-            cards.forEach(card => {
-                const titulo = card.querySelector('h2').innerText.toLowerCase();
-                const citacao = card.querySelector('blockquote').innerText.toLowerCase();
-                const descricao = card.querySelector('p').innerText.toLowerCase();
-                
-                if (titulo.includes(termo) || citacao.includes(termo) || descricao.includes(termo)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+            document.querySelectorAll('#feed-container .story-container').forEach(card => {
+                const texto = card.innerText.toLowerCase();
+                card.style.display = texto.includes(termo) ? 'block' : 'none';
             });
         }
-
-        function verificarEnter(event) {
-            if (event.key === 'Enter') {
-                document.getElementById('inputBusca').blur();
-            }
-        }
-
-        fetch('videos.json')
-            .then(response => response.json())
-            .then(videos => {
-                const container = document.getElementById('feed-container');
-                const recentContainer = document.getElementById('recent-container');
-                
-                videos.forEach(item => {
-                    container.appendChild(criarCardVideo(item));
-                });
-
-                const ultimosVideos = [...videos].reverse().slice(0, 2);
-                ultimosVideos.forEach(item => {
-                    recentContainer.appendChild(criarCardVideo(item));
-                });
-
-                const allVideos = document.querySelectorAll('video');
-                allVideos.forEach(video => {
-                    video.addEventListener('play', () => {
-                        allVideos.forEach(otherVideo => {
-                            if (otherVideo !== video) {
-                                otherVideo.pause();
-                            }
-                        });
-                    });
-                });
-            })
-            .catch(error => console.error('Erro ao carregar os vídeos:', error));
-
+        function verificarEnter(e) { if (e.key === 'Enter') document.getElementById('inputBusca').blur(); }
+        fetch('videos.json').then(r => r.json()).then(videos => {
+            const container = document.getElementById('feed-container'), recentContainer = document.getElementById('recent-container');
+            videos.forEach(item => container.appendChild(criarCardVideo(item)));
+            [...videos].reverse().slice(0, 2).forEach(item => recentContainer.appendChild(criarCardVideo(item)));
+            document.querySelectorAll('video').forEach(v => v.addEventListener('play', e => document.querySelectorAll('video').forEach(o => o !== e.target && o.pause())));
+        });
         function criarCardVideo(item) {
-            const storyDiv = document.createElement('div');
-            storyDiv.className = 'story-container';
-            
-            storyDiv.innerHTML = `
-                <div class="video-box">
-                    <video controls loop playsinline preload="metadata">
-                        <source src="${item.src}" type="video/mp4">
-                        Seu navegador não suporta vídeos.
-                    </video>
-                </div>
-                <div class="story-content">
-                    <h2>${item.titulo}</h2>
-                    <blockquote>"${item.citacao}"</blockquote>
-                    <p>${item.descricao}</p>
-                    <button class="like-btn" onclick="toggleLike(this)">
-                        <span>❤️</span> Curtir
-                    </button>
-                </div>
-            `;
-            return storyDiv;
+            const div = document.createElement('div'); div.className = 'story-container';
+            div.innerHTML = `<div class="video-box"><video controls loop playsinline><source src="${item.src}" type="video/mp4"></video></div><div class="story-content"><h2>${item.titulo}</h2><blockquote>"${item.citacao}"</blockquote><p>${item.descricao}</p><button class="like-btn" onclick="toggleLike(this)"><span>❤️</span> Curtir</button></div>`;
+            return div;
         }
-
-        function toggleLike(btn) {
-            btn.classList.toggle('liked');
-            if (btn.classList.contains('liked')) {
-                btn.innerHTML = '<span>❤️</span> Te amo!';
-            } else {
-                btn.innerHTML = '<span>❤️</span> Curtir';
-            }
-        }
+        function toggleLike(btn) { btn.classList.toggle('liked'); btn.innerHTML = btn.classList.contains('liked') ? '<span>❤️</span> Te amo!' : '<span>❤️</span> Curtir'; }
     </script>
-
 </body>
 </html>
