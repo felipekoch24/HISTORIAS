@@ -67,7 +67,7 @@
                     <span class="card-icon">❤️</span>
                     <div class="card-text">
                         <h3>Elogio</h3>
-                        <p>Isso nos motiva</p>
+                        <p>Isso me motiva</p>
                     </div>
                     <span class="arrow">›</span>
                 </a>
@@ -110,7 +110,6 @@
 
     <!-- BOTÃO FLUTUANTE TOPO -->
     <button id="btnTopo" onclick="voltarAoTopo()">⬆</button>
-
     <!-- MODAIS -->
     <div id="modalFoto" class="image-modal" onclick="fecharFotoGrande()">
         <img id="imgModal" src="">
@@ -119,7 +118,9 @@
 
     <div id="modalEasterEgg" class="easter-egg-modal" onclick="fecharEasterEggFora(event)">
         <div class="easter-egg-content" onclick="event.stopPropagation()">
-            <img id="imgEasterEgg" src="" alt="Surpresa Secreta">
+            <!-- ADICIONADO O ONCLICK E O CURSOR AQUI NA IMAGEM -->
+            <img id="imgEasterEgg" src="" alt="Surpresa Secreta" onclick="abrirFotoGrande(this.src)" style="cursor: pointer;" title="Clique para ampliar">
+            
             <div id="textoEasterEgg" class="easter-egg-text">Carregando surpresa...</div>
             <div class="easter-egg-buttons">
                 <button class="btn-easter" onclick="sortearEasterEgg()">✨ Outra Surpresa</button>
@@ -127,6 +128,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- SCRIPT SEPARADO -->
     <script src="script.js"></script>
