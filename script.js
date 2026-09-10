@@ -79,7 +79,7 @@ function criarCardVideo(item) {
     div.className = 'story-container';
     div.innerHTML = `
         <div class="video-box">
-            <video preload="none" loop playsinline>
+            <video controls preload="none" loop playsinline>
                 <source src="${item.src}" type="video/mp4">
             </video>
         </div>
@@ -90,6 +90,7 @@ function criarCardVideo(item) {
             <button class="like-btn" onclick="toggleLike(this)"><span>❤️</span> Curtir</button>
         </div>`;
     
+    // Garante que só um vídeo toca por vez
     const video = div.querySelector('video');
     video.addEventListener('play', () => {
         document.querySelectorAll('video').forEach(outroVideo => {
