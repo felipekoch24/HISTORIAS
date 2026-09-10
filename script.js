@@ -79,7 +79,7 @@ function criarCardVideo(item) {
     div.className = 'story-container';
     div.innerHTML = `
         <div class="video-box">
-            <video controls preload="none" loop playsinline>
+            <video controls preload="none" muted playsinline loop>
                 <source src="${item.src}" type="video/mp4">
             </video>
         </div>
@@ -90,9 +90,14 @@ function criarCardVideo(item) {
             <button class="like-btn" onclick="toggleLike(this)"><span>❤️</span> Curtir</button>
         </div>`;
     
-    // Garante que só um vídeo toca por vez
     const video = div.querySelector('video');
+    
+    // Garante que o vídeo só carrega metadados quando o usuário interagir ou dar play
     video.addEventListener('play', () => {
+        // Remove o mudo assim que ela dá o play para o som sair normal
+        video.muted = false;
+        
+        // Pausa todos os outros vídeos da página
         document.querySelectorAll('video').forEach(outroVideo => {
             if (outroVideo !== video) {
                 outroVideo.pause();
