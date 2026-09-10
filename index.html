@@ -116,11 +116,16 @@
         <img id="imgModal" src="">
         <button class="close-modal">Fechar</button>
     </div>
-    <div id="modalEasterEgg" class="easter-egg-modal">
-        <div class="easter-egg-content">
-            <img src="carta-lendaria.png">
-            <div class="easter-egg-text">TU é curiosa né meu AMOR kkk<br>Mas que bom que CLICOU<br><br>Descobriu meu SEGREDO👻<br>Espero que tenha gostado da SURPRESA KK 🫂😘</div>
-            <button class="close-easter-egg" onclick="fecharEasterEgg()">Fechar Cartão</button>
+
+    <!-- MODAL EASTER EGG ATUALIZADO (CARTAS LENDÁRIAS) -->
+    <div id="modalEasterEgg" class="easter-egg-modal" onclick="fecharEasterEggFora(event)">
+        <div class="easter-egg-content" onclick="event.stopPropagation()">
+            <img id="imgEasterEgg" src="" alt="Surpresa Secreta">
+            <div id="textoEasterEgg" class="easter-egg-text">Carregando surpresa...</div>
+            <div class="easter-egg-buttons">
+                <button class="btn-easter" onclick="sortearEasterEgg()">✨ Outra Surpresa</button>
+                <button class="btn-easter btn-fechar" onclick="fecharEasterEgg()">Fechar</button>
+            </div>
         </div>
     </div>
 
@@ -135,8 +140,28 @@
         }
         function abrirFotoGrande(src) { const m = document.getElementById('modalFoto'); m.style.display = 'flex'; document.getElementById('imgModal').src = src; }
         function fecharFotoGrande() { document.getElementById('modalFoto').style.display = 'none'; }
-        function abrirEasterEgg() { document.getElementById('modalEasterEgg').style.display = 'flex'; }
+        
+        // Lógica do Easter Egg via JSON com Sorteio Aleatório
+        let listaSurpresas = [];
+        fetch('surpresas.json')
+            .then(response => response.json())
+            .then(data => { listaSurpresas = data; })
+            .catch(error => console.log('Erro ao carregar surpresas:', error));
+
+        function abrirEasterEgg() {
+            document.getElementById('modalEasterEgg').style.display = 'flex';
+            sortearEasterEgg();
+        }
+        function sortearEasterEgg() {
+            if (listaSurpresas.length === 0) return;
+            const randomIndex = Math.floor(Math.random() * listaSurpresas.length);
+            const atual = listaSurpresas[randomIndex];
+            document.getElementById('imgEasterEgg').src = atual.img;
+            document.getElementById('textoEasterEgg').innerHTML = atual.texto;
+        }
         function fecharEasterEgg() { document.getElementById('modalEasterEgg').style.display = 'none'; }
+        function fecharEasterEggFora(e) { if(e.target.id === 'modalEasterEgg') fecharEasterEgg(); }
+
         const btnTopo = document.getElementById('btnTopo');
         window.addEventListener('scroll', () => btnTopo.style.display = window.scrollY > 300 ? 'flex' : 'none');
         function voltarAoTopo() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -148,6 +173,7 @@
             });
         }
         function verificarEnter(e) { if (e.key === 'Enter') document.getElementById('inputBusca').blur(); }
+        
         fetch('videos.json').then(r => r.json()).then(videos => {
             const container = document.getElementById('feed-container'), recentContainer = document.getElementById('recent-container');
             videos.forEach(item => container.appendChild(criarCardVideo(item)));
