@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <!-- PRIMEIRA PARTE: TOPO COM A IMAGEM COMPLETA (topo.jpg) -->
+    <!-- TOPO 1 (IMAGEM COMPLETA) -->
     <header class="topo-completo">
         <img src="topo.jpg" alt="Quatro Mundos, Um Só Amor" class="topo-banner-img">
     </header>
@@ -82,7 +82,7 @@
             </div>
         </div>
 
-        <!-- SEGUNDA PARTE: IMAGEM DOS SÍMBOLOS (sinais.png) -->
+        <!-- TOPO 2 (IMAGEM SINAIS) -->
         <div class="separador-mundos">
             <img src="sinais.png" alt="Símbolos dos Mundos" class="topo-banner-sinais">
         </div>
@@ -117,7 +117,6 @@
         <button class="close-modal">Fechar</button>
     </div>
 
-    <!-- MODAL EASTER EGG ATUALIZADO (CARTAS LENDÁRIAS) -->
     <div id="modalEasterEgg" class="easter-egg-modal" onclick="fecharEasterEggFora(event)">
         <div class="easter-egg-content" onclick="event.stopPropagation()">
             <img id="imgEasterEgg" src="" alt="Surpresa Secreta">
@@ -129,63 +128,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        function mudarAba(aba, btn) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('aba-' + aba).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-        function abrirFotoGrande(src) { const m = document.getElementById('modalFoto'); m.style.display = 'flex'; document.getElementById('imgModal').src = src; }
-        function fecharFotoGrande() { document.getElementById('modalFoto').style.display = 'none'; }
-        
-        // Lógica do Easter Egg via JSON com Sorteio Aleatório
-        let listaSurpresas = [];
-        fetch('surpresas.json')
-            .then(response => response.json())
-            .then(data => { listaSurpresas = data; })
-            .catch(error => console.log('Erro ao carregar surpresas:', error));
-
-        function abrirEasterEgg() {
-            document.getElementById('modalEasterEgg').style.display = 'flex';
-            sortearEasterEgg();
-        }
-        function sortearEasterEgg() {
-            if (listaSurpresas.length === 0) return;
-            const randomIndex = Math.floor(Math.random() * listaSurpresas.length);
-            const atual = listaSurpresas[randomIndex];
-            document.getElementById('imgEasterEgg').src = atual.img;
-            document.getElementById('textoEasterEgg').innerHTML = atual.texto;
-        }
-        function fecharEasterEgg() { document.getElementById('modalEasterEgg').style.display = 'none'; }
-        function fecharEasterEggFora(e) { if(e.target.id === 'modalEasterEgg') fecharEasterEgg(); }
-
-        const btnTopo = document.getElementById('btnTopo');
-        window.addEventListener('scroll', () => btnTopo.style.display = window.scrollY > 300 ? 'flex' : 'none');
-        function voltarAoTopo() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-        function filtrarVideos() {
-            const termo = document.getElementById('inputBusca').value.toLowerCase();
-            document.querySelectorAll('#feed-container .story-container').forEach(card => {
-                const texto = card.innerText.toLowerCase();
-                card.style.display = texto.includes(termo) ? 'block' : 'none';
-            });
-        }
-        function verificarEnter(e) { if (e.key === 'Enter') document.getElementById('inputBusca').blur(); }
-        
-        fetch('videos.json').then(r => r.json()).then(videos => {
-            const container = document.getElementById('feed-container'), recentContainer = document.getElementById('recent-container');
-            videos.forEach(item => container.appendChild(criarCardVideo(item)));
-            [...videos].reverse().slice(0, 2).forEach(item => recentContainer.appendChild(criarCardVideo(item)));
-            document.querySelectorAll('video').forEach(v => v.addEventListener('play', e => document.querySelectorAll('video').forEach(o => o !== e.target && o.pause())));
-        });
-        function criarCardVideo(item) {
-            const div = document.createElement('div'); div.className = 'story-container';
-            div.innerHTML = `<div class="video-box"><video controls loop playsinline><source src="${item.src}" type="video/mp4"></video></div><div class="story-content"><h2>${item.titulo}</h2><blockquote>"${item.citacao}"</blockquote><p>${item.descricao}</p><button class="like-btn" onclick="toggleLike(this)"><span>❤️</span> Curtir</button></div>`;
-            return div;
-        }
-        function toggleLike(btn) { btn.classList.toggle('liked'); btn.innerHTML = btn.classList.contains('liked') ? '<span>❤️</span> Te amo!' : '<span>❤️</span> Curtir'; }
-    </script>
+    <!-- SCRIPT SEPARADO -->
+    <script src="script.js"></script>
 </body>
 </html>
