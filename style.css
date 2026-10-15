@@ -488,3 +488,30 @@ body {
     from { opacity: 0; transform: translateY(15px); }
     to { opacity: 1; transform: translateY(0); }
 }
+.cronometro-section {
+    padding: 0 15px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+.cronometro-card {
+    background: rgba(20, 20, 20, 0.9);
+    border: 2px solid #ff4d79;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(255, 77, 121, 0.3);
+}
+
+.cronometro-card h2 {
+    color: #ff4d79;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.contador-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: #fff;
+    font-size: 0.95rem;
+}
