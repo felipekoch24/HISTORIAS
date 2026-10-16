@@ -113,7 +113,7 @@ function toggleLike(btn) {
     btn.innerHTML = btn.classList.contains('liked') ? '<span>❤️</span> Te amo!' : '<span>❤️</span> Curtir'; 
 }
 function atualizarCronometro() {
-    const dataInicio = new Date(2025, 8, 22); // 22 de Setembro de 2025 (Mês 8 = Setembro em JS)
+    const dataInicio = new Date(2025, 9, 22); // 22 de Setembro de 2025 (Mês 9 = Setembro em JS)
     const agora = new Date();
 
     // Cálculo de Anos e Meses
