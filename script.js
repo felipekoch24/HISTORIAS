@@ -112,24 +112,30 @@ function toggleLike(btn) {
     btn.classList.toggle('liked'); 
     btn.innerHTML = btn.classList.contains('liked') ? '<span>❤️</span> Te amo!' : '<span>❤️</span> Curtir'; 
 }
+
 function atualizarCronometro() {
-    const dataInicio = new Date(2025, 9, 22); // 22 de Setembro de 2025 (Mês 9 = Setembro em JS)
+    const dataInicio = new Date(2025, 8, 22); // 22 de Setembro de 2025
     const agora = new Date();
 
-    // Cálculo de Anos e Meses
     let anos = agora.getFullYear() - dataInicio.getFullYear();
     let meses = agora.getMonth() - dataInicio.getMonth();
     
+    // Se ainda NÃO chegou o dia 22 do mês atual, não completa o mês!
+    if (agora.getDate() < 22) {
+        meses--;
+    }
+
+    // Ajuste de virada de ano caso os meses fiquem negativos
     if (meses < 0) {
         anos--;
         meses += 12;
     }
 
-    // Calcular dias totais desde o início
+    // Calcular dias totais corridos desde o início
     const diffTime = Math.abs(agora - dataInicio);
     const diasTotais = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    // Próximo mêsversario (dia 22)
+    // Próximo mêsversário (dia 22)
     let proximoMes = new Date(agora.getFullYear(), agora.getMonth(), 22);
     if (agora.getDate() > 22) {
         proximoMes.setMonth(proximoMes.getMonth() + 1);
@@ -138,23 +144,22 @@ function atualizarCronometro() {
     const diffTimeProximo = proximoMes - agora;
     const diffProximoMes = Math.ceil(diffTimeProximo / (1000 * 60 * 60 * 24));
 
-    // Verificar se HOJE é dia 22!
+    // Montar o texto do tempo (lidando com plural de ano/anos)
+    const textoTempo = anos > 0 
+        ? `${anos} ${anos === 1 ? 'ano' : 'anos'}${meses > 0 ? ` e ${meses}${meses === 1 ? 'mês' : 'meses'}` : ''}`
+        : `${meses} ${meses === 1 ? 'mês' : 'meses'}`;
+
     const container = document.getElementById("contador-tempo");
     if (container) {
         if (agora.getDate() === 22) {
             container.innerHTML = `
-                <p>🏆 <b>${anos} ano e ${meses} meses</b> de história (${diasTotais} dias juntos!)</p>
+                <p>🏆 <b>${textoTempo}</b> de história (${diasTotais} dias juntos!)</p>
                 <p style="color: #ff4d79; font-weight: bold;">🎉 HOJE É O NOSSO DIA 22! Mais um mês de muito amor! Te amo ❤️♾️</p>
-            `;
-        } else if (diffProximoMes === 0) {
-            container.innerHTML = `
-                <p>🏆 <b>${anos} ano e ${meses} meses</b> de história (${diasTotais} dias juntos!)</p>
-                <p style="color: #ff4d79; font-weight: bold;">✨ É HOJE! Feliz mais um mêsversário para nós! 🥂❤️</p>
             `;
         } else {
             container.innerHTML = `
-                <p>🏆 <b>${anos} ano e ${meses} meses</b> de história (${diasTotais} dias juntos!)</p>
-                <p>⏳ Faltam <b>${diffProximoMes} dias</b> para o nosso próximo mêsversario (dia 22)</p>
+                <p>🏆 <b>${textoTempo}</b> de história (${diasTotais} dias juntos!)</p>
+                <p>⏳ Faltam <b>${diffProximoMes} dias</b> para o nosso próximo mêsversário (dia 22)</p>
             `;
         }
     }
@@ -162,3 +167,4 @@ function atualizarCronometro() {
 
 // Executar assim que o site abrir
 atualizarCronometro();
+
