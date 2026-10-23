@@ -18,7 +18,7 @@
         <img src="topo.jpg" alt="Quatro Mundos, Um Só Amor" class="topo-banner-img">
     </header>
 
-    <!-- SISTEMA DE ABAS -->
+        <!-- SISTEMA DE ABAS -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="mudarAba('todos', this)">
             <span class="tab-icon">🔲</span>
@@ -30,12 +30,18 @@
             RECENTES
             <span class="tab-sub">Últimos adicionados</span>
         </button>
+        <button class="tab-btn" onclick="mudarAba('favoritos', this)">
+            <span class="tab-icon">❤️</span>
+            FAVORITOS
+            <span class="tab-sub">Seus preferidos</span>
+        </button>
         <button class="tab-btn" onclick="mudarAba('suporte', this)">
             <span class="tab-icon">🎧</span>
             SUPORTE
             <span class="tab-sub">Fale com o DEV</span>
         </button>
     </div>
+    
 
     <!-- ABA 1: TODOS -->
     <div id="aba-todos" class="tab-content active">
@@ -112,7 +118,12 @@
         <div id="recent-container"></div>
     </div>
 
-    <!-- ABA 3: SUPORTE -->
+    <!-- ABA 3: FAVORITOS -->
+    <div id="aba-favoritos" class="tab-content">
+        <div id="favoritos-container"></div>
+    </div>
+
+    <!-- ABA 4: SUPORTE -->
     <div id="aba-suporte" class="tab-content">
         <section class="dev-section">
             <img src="dev.png" alt="Felipe" class="dev-avatar" onclick="abrirFotoGrande(this.src)">
@@ -124,8 +135,11 @@
         </section>
     </div>
 
-    <!-- BOTÃO FLUTUANTE TOPO -->
+    <!-- BOTÕES FLUTUANTES (SUBIR E DESCER) -->
+<div class="botoes-flutuantes">
     <button id="btnTopo" onclick="voltarAoTopo()">⬆</button>
+    <button id="btnFim" onclick="irAoFim()">⬇</button>
+</div>
     <!-- MODAIS -->
     <div id="modalFoto" class="image-modal" onclick="fecharFotoGrande()">
         <img id="imgModal" src="">
