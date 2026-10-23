@@ -186,8 +186,8 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-/* --- FEED DE VÍDEOS --- */
-#feed-container, #recent-container {
+/* --- FEED DE VÍDEOS & FAVORITOS --- */
+#feed-container, #recent-container, #favoritos-container {
     width: 100%;
     max-width: 500px;
     padding: 0 15px;
@@ -347,11 +347,18 @@ body {
     opacity: 1;
 }
 
-/* --- BOTÃO TOPO & MODAIS --- */
-#btnTopo {
+/* --- BOTÕES FLUTUANTES (SUBIR E DESCER) & MODAIS --- */
+.botoes-flutuantes {
     position: fixed;
     bottom: 25px;
-    right: 25px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 998;
+}
+
+.botoes-flutuantes button {
     background-color: #ff4081;
     color: #1a0f14;
     border: none;
@@ -361,12 +368,18 @@ body {
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
-    display: none;
+    display: none; /* Inicia escondido, o JS liga com o scroll */
     align-items: center;
     justify-content: center;
     box-shadow: 0 5px 20px rgba(255, 64, 129, 0.5);
-    z-index: 998;
+    transition: transform 0.2s ease, background-color 0.3s;
 }
+
+
+.botoes-flutuantes button:active {
+    transform: scale(0.9);
+}
+
 
 .image-modal {
     display: none;
