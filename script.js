@@ -114,34 +114,52 @@ Promise.all([
     const ultimosRecentes = [...videos].reverse().slice(0, 5);
     ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
     
-    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (COM PAINEL DINÂMICO DE TOTAIS)
+    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (COM DESTAQUE E TAMANHO MAIOR)
     const listaAbaAtualizacoes = document.getElementById('listaAbaAtualizacoes');
     if (listaAbaAtualizacoes) {
         listaAbaAtualizacoes.innerHTML = '';
 
-        // Bloco de Estatísticas Automáticas no Topo
+        // Bloco de Estatísticas Automáticas no Topo (Mais chamativo)
         const cabecalhoEstatisticas = document.createElement('div');
-        cabecalhoEstatisticas.style.cssText = "margin-bottom: 15px; padding: 12px; background: rgba(255, 42, 133, 0.1); border: 1px solid rgba(255, 42, 133, 0.3); border-radius: 8px; text-align: center; font-size: 13px; color: #ff85b3;";
-        cabecalhoEstatisticas.innerHTML = `🏆 <b>Total no ar:</b> ${surpresas.length} Easter Eggs e ${videos.length} vídeos de pura história! ✨`;
+        cabecalhoEstatisticas.style.cssText = "margin-bottom: 25px; padding: 18px; background: rgba(255, 42, 133, 0.18); border: 2px solid rgba(255, 42, 133, 0.6); border-radius: 12px; text-align: center; box-shadow: 0 0 15px rgba(255, 42, 133, 0.2);";
+        cabecalhoEstatisticas.innerHTML = `🏆 <b style="color: #fff; font-size: 17px;">Total no ar:</b><br><span style="font-size: 17px; color: #ff4d94; font-weight: bold;">${surpresas.length} Easter Eggs</span> e <span style="font-size: 17px; color: #ff4d94; font-weight: bold;">${videos.length} vídeos</span>! ✨`;
         listaAbaAtualizacoes.appendChild(cabecalhoEstatisticas);
 
-        // Easter Eggs com data e hora
+        // Easter Eggs com data e hora (Completamente destacados)
         if (surpresas.length > 0) {
             [...surpresas].reverse().slice(0, 5).forEach(item => {
                 const tagData = item.data 
-                    ? `<span style="display: block; font-size: 11px; color: #ff4d94; margin-bottom: 4px;">🕒 Adicionado em: ${item.data}</span>` 
-                    : '';
+                    ? `<span style="display: inline-block; background: rgba(255, 77, 148, 0.25); color: #ff99c2; padding: 4px 8px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 8px; border: 1px solid rgba(255,77,148,0.4);">🕒 ${item.data}</span>` 
+                    : `<span style="display: inline-block; background: rgba(255, 77, 148, 0.15); color: #ff99c2; padding: 4px 8px; border-radius: 6px; font-size: 12px; margin-bottom: 8px;">🕒 Recentemente</span>`;
 
                 const li = document.createElement('li');
-                li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,42,133,0.3); font-size: 14px; color: #ff85b3;";
+                li.style.cssText = "margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid rgba(255,42,133,0.3); list-style: none;";
                 li.innerHTML = `
-                    ${tagData}
-                    🎁 <b>Novo Easter Egg Secreto!</b><br>
-                    <span style="font-size: 12px; color: #ccc;">Uma nova surpresa escondida foi adicionada na aba Suporte. Vai lá procurar! 👀✨</span>
+                    ${tagData}<br>
+                    <span style="font-size: 16px; color: #ff66b2; font-weight: bold;">🎁 Novo Easter Egg Secreto!</span><br>
+                    <span style="font-size: 14px; color: #e0e0e0; line-height: 1.4; display: block; margin-top: 4px;">Uma nova surpresa escondida foi adicionada na aba Suporte. Vai lá procurar! 👀✨</span>
                 `;
                 listaAbaAtualizacoes.appendChild(li);
             });
         }
+
+        // Vídeos com data e hora (Completamente destacados)
+        [...videos].reverse().slice(0, 10).forEach(video => {
+            const tagData = video.data 
+                ? `<span style="display: inline-block; background: rgba(255, 255, 255, 0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.3);">🕒 ${video.data}</span>` 
+                : `<span style="display: inline-block; background: rgba(255, 255, 255, 0.08); color: #aaa; padding: 4px 8px; border-radius: 6px; font-size: 12px; margin-bottom: 8px;">🕒 Recentemente</span>`;
+
+            const li = document.createElement('li');
+            li.style.cssText = "margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid rgba(255,255,255,0.15); list-style: none;";
+            li.innerHTML = `
+                ${tagData}<br>
+                <span style="font-size: 17px; color: #ffffff; font-weight: bold;">🚀 ${video.titulo}</span><br>
+                <span style="font-size: 14px; color: #cccccc; line-height: 1.4; display: block; margin-top: 4px;">${video.descricao}</span>
+            `;
+            listaAbaAtualizacoes.appendChild(li);
+        });
+    }
+    
 
         // Vídeos com data e hora
         [...videos].reverse().slice(0, 10).forEach(video => {
