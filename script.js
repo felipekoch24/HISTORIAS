@@ -1,3 +1,11 @@
+// ==========================================
+// MODO DESENVOLVEDOR (NÃO NOTIFICA VOCÊ MESMO)
+// ==========================================
+// Se você acessar o link com ?dev=1 no final uma única vez, seu aparelho fica salvo como "DEV"
+if (window.location.search.includes('dev=1')) {
+    localStorage.setItem('loveRay_souDev', 'true');
+}
+
 function mudarAba(aba, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -8,7 +16,7 @@ function mudarAba(aba, btn) {
         renderizarFavoritos();
     }
 
-    // Se ela abrir a aba de atualizações, dispara o aviso para o teu e-mail
+    // Dispara o aviso para o teu e-mail (apenas se NÃO for o teu aparelho marcado como DEV)
     if (aba === 'atualizacoes') {
         notificarSeuAcesso();
     }
@@ -26,12 +34,10 @@ function fecharFotoGrande() {
     document.getElementById('modalFoto').style.display = 'none'; 
 }
 
-// Lógica do Easter Egg via JSON
+// ==========================================
+// LÓGICA DO EASTER EGG
+// ==========================================
 let listaSurpresas = [];
-fetch('surpresas.json')
-    .then(response => response.json())
-    .then(data => { listaSurpresas = data; })
-    .catch(error => console.log('Erro ao carregar surpresas:', error));
 
 function abrirEasterEgg() {
     document.getElementById('modalEasterEgg').style.display = 'flex';
@@ -54,7 +60,9 @@ function fecharEasterEggFora(e) {
     if(e.target.id === 'modalEasterEgg') fecharEasterEgg(); 
 }
 
-// Botões Flutuantes (Topo e Fim)
+// ==========================================
+// BOTÕES FLUTUANTES E PESQUISA
+// ==========================================
 const btnTopo = document.getElementById('btnTopo');
 const btnFim = document.getElementById('btnFim');
 
@@ -85,40 +93,54 @@ function verificarEnter(e) {
 }
 
 // ==========================================
-// SISTEMA DE FAVORITOS E VÍDEOS
+// CARREGAMENTO DE VÍDEOS, FAVORITOS E ATUALIZAÇÕES
 // ==========================================
 let listaFavoritos = JSON.parse(localStorage.getItem('loveRay_favoritos')) || [];
 let todosOsVideos = [];
 
-// Carregamento dos vídeos
-fetch('videos.json')
-    .then(r => r.json())
-    .then(videos => {
-        todosOsVideos = videos;
-        const container = document.getElementById('feed-container');
-        const recentContainer = document.getElementById('recent-container');
-        
-        // Renderiza todos os vídeos no feed principal
-        videos.forEach(item => container.appendChild(criarCardVideo(item)));
-        
-        // ABA RECENTES: Mostra os últimos 5 lançamentos
-        const ultimosRecentes = [...videos].reverse().slice(0, 5);
-        ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
-        
-        // PREENCHE A ABA DE ATUALIZAÇÕES AUTOMATICAMENTE
-        const listaAbaAtualizacoes = document.getElementById('listaAbaAtualizacoes');
-        if (listaAbaAtualizacoes) {
-            listaAbaAtualizacoes.innerHTML = '';
-            [...videos].reverse().slice(0, 10).forEach(video => {
+Promise.all([
+    fetch('videos.json').then(r => r.json()),
+    fetch('surpresas.json').then(r => r.json()).catch(() => [])
+]).then(([videos, surpresas]) => {
+    todosOsVideos = videos;
+    listaSurpresas = surpresas;
+
+    const container = document.getElementById('feed-container');
+    const recentContainer = document.getElementById('recent-container');
+    
+    // 1. Renderiza todos os vídeos no feed principal
+    videos.forEach(item => container.appendChild(criarCardVideo(item)));
+    
+    // 2. ABA RECENTES: Mostra os últimos 5 lançamentos
+    const ultimosRecentes = [...videos].reverse().slice(0, 5);
+    ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
+    
+    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (EASTER EGGS + VÍDEOS)
+    const listaAbaAtualizacoes = document.getElementById('listaAbaAtualizacoes');
+    if (listaAbaAtualizacoes) {
+        listaAbaAtualizacoes.innerHTML = '';
+
+        // Mostra os últimos Easter Eggs adicionados (mantendo o mistério)
+        if (surpresas.length > 0) {
+            [...surpresas].reverse().slice(0, 5).forEach(() => {
                 const li = document.createElement('li');
-                li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
-                li.innerHTML = `🚀 <b>${video.titulo}</b><br><span style="font-size: 12px; color: #aaa;">${video.descricao}</span>`;
+                li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,42,133,0.3); font-size: 14px; color: #ff85b3;";
+                li.innerHTML = `🎁 <b>Novo Easter Egg Secreto!</b><br><span style="font-size: 12px; color: #ccc;">Uma nova surpresa escondida foi adicionada na aba Suporte. Vai lá procurar! 👀✨</span>`;
                 listaAbaAtualizacoes.appendChild(li);
             });
         }
 
-        renderizarFavoritos();
-    });
+        // Mostra os últimos vídeos adicionados
+        [...videos].reverse().slice(0, 10).forEach(video => {
+            const li = document.createElement('li');
+            li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
+            li.innerHTML = `🚀 <b>${video.titulo}</b><br><span style="font-size: 12px; color: #aaa;">${video.descricao}</span>`;
+            listaAbaAtualizacoes.appendChild(li);
+        });
+    }
+
+    renderizarFavoritos();
+});
 
 function criarCardVideo(item) {
     const div = document.createElement('div'); 
@@ -201,11 +223,14 @@ function renderizarFavoritos() {
 // AVISO AUTOMÁTICO DE ACESSO (WEB3FORMS)
 // ==========================================
 function notificarSeuAcesso() {
-    // Evita enviar várias vezes na mesma sessão (para não lotar o teu e-mail)
+    // Se for o seu dispositivo (marcado com ?dev=1), não envia e-mail!
+    if (localStorage.getItem('loveRay_souDev') === 'true') return;
+
+    // Evita enviar várias vezes seguidas na mesma sessão
     if (sessionStorage.getItem('loveRay_notificado')) return;
 
     const dados = {
-        access_key: "2e208f7f-d021-4eb2-89ff-f7edd528ebf2", // Chave inserida com sucesso!
+        access_key: "2e208f7f-d021-4eb2-89ff-f7edd528ebf2",
         subject: "❤️ A Rayssa abriu o Love Ray!",
         message: "Chefe, a Rayssa entrou na aba de Atualizações do aplicativo agora mesmo! Hora de conferir. 🚀"
     };
@@ -277,6 +302,5 @@ function atualizarCronometro() {
     }
 }
 
-// Executar cronômetro assim que abrir
 atualizarCronometro();
             
