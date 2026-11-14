@@ -33,20 +33,40 @@ function fecharFotoGrande() {
 }
 
 // ==========================================
-// LÓGICA DO EASTER EGG
+// LÓGICA INTELIGENTE DOS EASTER EGGS
 // ==========================================
 let listaSurpresas = [];
 
 function abrirEasterEgg() {
-    document.getElementById('modalEasterEgg').style.display = 'flex';
+    const modal = document.getElementById('modalEasterEgg');
+    modal.style.display = 'flex';
+    
+    // Garante que a imagem do Easter Egg fica grande e fluida
+    const imgEl = document.getElementById('imgEasterEgg');
+    if (imgEl) {
+        imgEl.style.cssText = "width: 100%; max-height: 70vh; object-fit: contain; border-radius: 12px; display: block; margin: 0 auto;";
+    }
+
     sortearEasterEgg();
     notificarSeuAcesso("Abriu um Easter Egg Secreto! 🎁");
 }
 
 function sortearEasterEgg() {
     if (listaSurpresas.length === 0) return;
-    const randomIndex = Math.floor(Math.random() * listaSurpresas.length);
-    const atual = listaSurpresas[randomIndex];
+
+    // Controla quantas vezes ela já abriu para priorizar os 3 últimos lançamentos
+    let vezesAbertas = parseInt(localStorage.getItem('loveRay_vezesEasterEgg') || '0');
+    let atual;
+
+    if (vezesAbertas < 3 && listaSurpresas.length > vezesAbertas) {
+        const listaInvertida = [...listaSurpresas].reverse();
+        atual = listaInvertida[vezesAbertas]; // Mostra o 1º, 2º e 3º mais recente nas primeiras aberturas
+        localStorage.setItem('loveRay_vezesEasterEgg', vezesAbertas + 1);
+    } else {
+        const randomIndex = Math.floor(Math.random() * listaSurpresas.length);
+        atual = listaSurpresas[randomIndex];
+    }
+
     document.getElementById('imgEasterEgg').src = atual.img;
     document.getElementById('textoEasterEgg').innerHTML = atual.texto;
 }
@@ -107,11 +127,12 @@ Promise.all([
     const container = document.getElementById('feed-container');
     const recentContainer = document.getElementById('recent-container');
     
-    // 1. Renderiza todos os vídeos no feed principal
-    videos.forEach(item => container.appendChild(criarCardVideo(item)));
+    // 1. FEED PRINCIPAL: Ordenado para os mais novos aparecerem no topo
+    const videosOrdenados = [...videos].reverse();
+    videosOrdenados.forEach(item => container.appendChild(criarCardVideo(item)));
     
     // 2. ABA RECENTES: Mostra os últimos 5 lançamentos
-    const ultimosRecentes = [...videos].reverse().slice(0, 5);
+    const ultimosRecentes = videosOrdenados.slice(0, 5);
     ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
     
     // 3. PREENCHE A ABA DE ATUALIZAÇÕES (COM DESTAQUE E TAMANHO MAIOR)
@@ -119,13 +140,13 @@ Promise.all([
     if (listaAbaAtualizacoes) {
         listaAbaAtualizacoes.innerHTML = '';
 
-        // Bloco de Estatísticas Automáticas no Topo (Mais chamativo)
+        // Bloco de Estatísticas Automáticas no Topo
         const cabecalhoEstatisticas = document.createElement('div');
         cabecalhoEstatisticas.style.cssText = "margin-bottom: 25px; padding: 18px; background: rgba(255, 42, 133, 0.18); border: 2px solid rgba(255, 42, 133, 0.6); border-radius: 12px; text-align: center; box-shadow: 0 0 15px rgba(255, 42, 133, 0.2);";
         cabecalhoEstatisticas.innerHTML = `🏆 <b style="color: #fff; font-size: 17px;">Total no ar:</b><br><span style="font-size: 17px; color: #ff4d94; font-weight: bold;">${surpresas.length} Easter Eggs</span> e <span style="font-size: 17px; color: #ff4d94; font-weight: bold;">${videos.length} vídeos</span>! ✨`;
         listaAbaAtualizacoes.appendChild(cabecalhoEstatisticas);
 
-        // Easter Eggs com data e hora (Completamente destacados)
+        // Easter Eggs com data e hora
         if (surpresas.length > 0) {
             [...surpresas].reverse().slice(0, 5).forEach(item => {
                 const tagData = item.data 
@@ -143,8 +164,8 @@ Promise.all([
             });
         }
 
-        // Vídeos com data e hora (Completamente destacados)
-        [...videos].reverse().slice(0, 10).forEach(video => {
+        // Vídeos com data e hora
+        videosOrdenados.slice(0, 10).forEach(video => {
             const tagData = video.data 
                 ? `<span style="display: inline-block; background: rgba(255, 255, 255, 0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 13px; font-weight: bold; margin-bottom: 8px; border: 1px solid rgba(255,255,255,0.3);">🕒 ${video.data}</span>` 
                 : `<span style="display: inline-block; background: rgba(255, 255, 255, 0.08); color: #aaa; padding: 4px 8px; border-radius: 6px; font-size: 12px; margin-bottom: 8px;">🕒 Recentemente</span>`;
