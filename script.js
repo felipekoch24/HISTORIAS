@@ -114,12 +114,18 @@ Promise.all([
     const ultimosRecentes = [...videos].reverse().slice(0, 5);
     ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
     
-    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (COM DIA E HORA)
+    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (COM PAINEL DINÂMICO DE TOTAIS)
     const listaAbaAtualizacoes = document.getElementById('listaAbaAtualizacoes');
     if (listaAbaAtualizacoes) {
         listaAbaAtualizacoes.innerHTML = '';
 
-        // Easter Eggs com data e hora (se preenchido no surpresas.json)
+        // Bloco de Estatísticas Automáticas no Topo
+        const cabecalhoEstatisticas = document.createElement('div');
+        cabecalhoEstatisticas.style.cssText = "margin-bottom: 15px; padding: 12px; background: rgba(255, 42, 133, 0.1); border: 1px solid rgba(255, 42, 133, 0.3); border-radius: 8px; text-align: center; font-size: 13px; color: #ff85b3;";
+        cabecalhoEstatisticas.innerHTML = `🏆 <b>Total no ar:</b> ${surpresas.length} Easter Eggs e ${videos.length} vídeos de pura história! ✨`;
+        listaAbaAtualizacoes.appendChild(cabecalhoEstatisticas);
+
+        // Easter Eggs com data e hora
         if (surpresas.length > 0) {
             [...surpresas].reverse().slice(0, 5).forEach(item => {
                 const tagData = item.data 
@@ -137,7 +143,7 @@ Promise.all([
             });
         }
 
-        // Vídeos com data e hora (se preenchido no videos.json)
+        // Vídeos com data e hora
         [...videos].reverse().slice(0, 10).forEach(video => {
             const tagData = video.data 
                 ? `<span style="display: block; font-size: 11px; color: #ff4d94; margin-bottom: 4px;">🕒 Subido em: ${video.data}</span>` 
