@@ -1,3 +1,9 @@
+// ==========================================
+// CONFIGURAÇÃO DO CHANGELOG / ATUALIZAÇÕES
+// ==========================================
+// Mude esta chave sempre que adicionar capítulos novos e quiser que o aviso apareça para ela de novo
+const VERSAO_ATUALIZACAO = "v91-legendary-love";
+
 function mudarAba(aba, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -57,7 +63,7 @@ const btnFim = document.getElementById('btnFim');
 window.addEventListener('scroll', () => {
     const visivel = window.scrollY > 300 ? 'flex' : 'none';
     if (btnTopo) btnTopo.style.display = visivel;
-    if (btnFim) btnFim.style.display = visivel; // AJUSTADO: Agora os dois botões respondem ao scroll
+    if (btnFim) btnFim.style.display = visivel;
 });
 
 function voltarAoTopo() { 
@@ -81,12 +87,12 @@ function verificarEnter(e) {
 }
 
 // ==========================================
-// SISTEMA DE FAVORITOS (LOCALSTORAGE)
+// SISTEMA DE FAVORITOS E VÍDEOS
 // ==========================================
 let listaFavoritos = JSON.parse(localStorage.getItem('loveRay_favoritos')) || [];
 let todosOsVideos = [];
 
-// Carregamento dos vídeos com preload="none" para otimizar velocidade
+// Carregamento dos vídeos
 fetch('videos.json')
     .then(r => r.json())
     .then(videos => {
@@ -94,10 +100,15 @@ fetch('videos.json')
         const container = document.getElementById('feed-container');
         const recentContainer = document.getElementById('recent-container');
         
+        // Renderiza todos os vídeos no feed principal
         videos.forEach(item => container.appendChild(criarCardVideo(item)));
-        [...videos].reverse().slice(0, 2).forEach(item => recentContainer.appendChild(criarCardVideo(item)));
+        
+        // ABA RECENTES: Mostra os últimos 5 lançamentos (ajustável se quiseres mais ou menos)
+        const ultimosRecentes = [...videos].reverse().slice(0, 5);
+        ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
         
         renderizarFavoritos();
+        verificarAtualizacoes(ultimosRecentes);
     });
 
 function criarCardVideo(item) {
@@ -126,12 +137,8 @@ function criarCardVideo(item) {
     
     const video = div.querySelector('video');
     
-    // Garante que o vídeo só carrega metadados quando o usuário interagir ou dar play
     video.addEventListener('play', () => {
-        // Remove o mudo assim que ela dá o play para o som sair normal
         video.muted = false;
-        
-        // Pausa todos os outros vídeos da página
         document.querySelectorAll('video').forEach(outroVideo => {
             if (outroVideo !== video) {
                 outroVideo.pause();
@@ -181,6 +188,44 @@ function renderizarFavoritos() {
     vidsFavoritos.forEach(item => favContainer.appendChild(criarCardVideo(item)));
 }
 
+// ==========================================
+// SISTEMA DE MODAL DE ATUALIZAÇÕES
+// ==========================================
+function verificarAtualizacoes(ultimosVideos) {
+    const listaChangelog = document.getElementById('listaChangelog');
+    if (!listaChangelog) return;
+
+    listaChangelog.innerHTML = '';
+    
+    // Pega os 3 vídeos mais recentes para listar o que mudou no changelog
+    ultimosVideos.slice(0, 3).forEach(video => {
+        const li = document.createElement('li');
+        li.style.cssText = "margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
+        li.innerHTML = `🚀 <b>${video.titulo}</b><br><span style="font-size: 12px; color: #aaa;">${video.descricao}</span>`;
+        listaChangelog.appendChild(li);
+    });
+
+    // Se ela ainda não viu esta versão, abre o modal automaticamente
+    const ultimaVersaoVista = localStorage.getItem('loveRay_versao');
+    if (ultimaVersaoVista !== VERSAO_ATUALIZACAO) {
+        document.getElementById('modalAtualizacoes').style.display = 'flex';
+    }
+}
+
+function fecharModalAtualizacoes() {
+    document.getElementById('modalAtualizacoes').style.display = 'none';
+    localStorage.setItem('loveRay_versao', VERSAO_ATUALIZACAO);
+}
+
+function fecharModalAtualizacoesFora(e) {
+    if (e.target.id === 'modalAtualizacoes') {
+        fecharModalAtualizacoes();
+    }
+}
+
+// ==========================================
+// CRONÔMETRO DE NAMORO
+// ==========================================
 function atualizarCronometro() {
     const dataInicio = new Date(2025, 8, 22); // 22 de Setembro de 2025
     const agora = new Date();
@@ -188,22 +233,18 @@ function atualizarCronometro() {
     let anos = agora.getFullYear() - dataInicio.getFullYear();
     let meses = agora.getMonth() - dataInicio.getMonth();
     
-    // Se ainda NÃO chegou o dia 22 do mês atual, não completa o mês!
     if (agora.getDate() < 22) {
         meses--;
     }
 
-    // Ajuste de virada de ano caso os meses fiquem negativos
     if (meses < 0) {
         anos--;
         meses += 12;
     }
 
-    // Calcular dias totais corridos desde o início
     const diffTime = Math.abs(agora - dataInicio);
     const diasTotais = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    // Próximo mêsversário (dia 22)
     let proximoMes = new Date(agora.getFullYear(), agora.getMonth(), 22);
     if (agora.getDate() > 22) {
         proximoMes.setMonth(proximoMes.getMonth() + 1);
@@ -212,7 +253,6 @@ function atualizarCronometro() {
     const diffTimeProximo = proximoMes - agora;
     const diffProximoMes = Math.ceil(diffTimeProximo / (1000 * 60 * 60 * 24));
 
-    // Montar o texto do tempo (lidando com plural de ano/anos)
     const textoTempo = anos > 0 
         ? `${anos} ${anos === 1 ? 'ano' : 'anos'}${meses > 0 ? ` e ${meses}${meses === 1 ? 'mês' : 'meses'}` : ''}`
         : `${meses} ${meses === 1 ? 'mês' : 'meses'}`;
@@ -235,4 +275,3 @@ function atualizarCronometro() {
 
 // Executar assim que o site abrir
 atualizarCronometro();
-                     
