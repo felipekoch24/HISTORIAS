@@ -18,7 +18,7 @@
         <img src="topo.jpg" alt="Quatro Mundos, Um Só Amor" class="topo-banner-img">
     </header>
 
-        <!-- SISTEMA DE ABAS -->
+    <!-- SISTEMA DE ABAS -->
     <div class="tabs-container">
         <button class="tab-btn active" onclick="mudarAba('todos', this)">
             <span class="tab-icon">🔲</span>
@@ -35,6 +35,11 @@
             FAVORITOS
             <span class="tab-sub">Seus preferidos</span>
         </button>
+        <button class="tab-btn" onclick="mudarAba('atualizacoes', this)">
+            <span class="tab-icon">✨</span>
+            ATUALIZAÇÕES
+            <span class="tab-sub">O que há de novo</span>
+        </button>
         <button class="tab-btn" onclick="mudarAba('suporte', this)">
             <span class="tab-icon">🎧</span>
             SUPORTE
@@ -46,7 +51,7 @@
     <!-- ABA 1: TODOS -->
     <div id="aba-todos" class="tab-content active">
         
-                <!-- BARRA DE PESQUISA -->
+        <!-- BARRA DE PESQUISA -->
         <div class="search-container">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
@@ -54,7 +59,7 @@
             </div>
         </div>
 
-        <!-- ⏳ CRONÔMETRO DE NAMORO (NOVO) -->
+        <!-- ⏳ CRONÔMETRO DE NAMORO -->
         <section class="cronometro-section">
             <div class="cronometro-card">
                 <h2>⏳ Nosso Tempo Juntos ♾️</h2>
@@ -63,7 +68,6 @@
                 </div>
             </div>
         </section>
-
 
         <!-- CARDS DE INTERAÇÃO (WHATSAPP) -->
         <div class="top-action-bar">
@@ -123,7 +127,18 @@
         <div id="favoritos-container"></div>
     </div>
 
-    <!-- ABA 4: SUPORTE -->
+    <!-- ABA 4: ATUALIZAÇÕES -->
+    <div id="aba-atualizacoes" class="tab-content">
+        <section class="dev-section" style="text-align: left; padding: 20px;">
+            <h2 style="color: #ff2a85; margin-bottom: 15px;">✨ Diário de Atualizações & Easter Eggs</h2>
+            <p style="color: #ccc; font-size: 14px; margin-bottom: 20px;">Aqui podes ver tudo o que o teu ruivo adicionou de novo no app:</p>
+            <ul id="listaAbaAtualizacoes" style="list-style: none; padding: 0;">
+                <!-- Preenchido automaticamente via JS -->
+            </ul>
+        </section>
+    </div>
+
+    <!-- ABA 5: SUPORTE -->
     <div id="aba-suporte" class="tab-content">
         <section class="dev-section">
             <img src="dev.png" alt="Felipe" class="dev-avatar" onclick="abrirFotoGrande(this.src)">
@@ -136,10 +151,11 @@
     </div>
 
     <!-- BOTÕES FLUTUANTES (SUBIR E DESCER) -->
-<div class="botoes-flutuantes">
-    <button id="btnTopo" onclick="voltarAoTopo()">⬆</button>
-    <button id="btnFim" onclick="irAoFim()">⬇</button>
-</div>
+    <div class="botoes-flutuantes">
+        <button id="btnTopo" onclick="voltarAoTopo()">⬆</button>
+        <button id="btnFim" onclick="irAoFim()">⬇</button>
+    </div>
+
     <!-- MODAIS -->
     <div id="modalFoto" class="image-modal" onclick="fecharFotoGrande()">
         <img id="imgModal" src="">
@@ -148,9 +164,7 @@
 
     <div id="modalEasterEgg" class="easter-egg-modal" onclick="fecharEasterEggFora(event)">
         <div class="easter-egg-content" onclick="event.stopPropagation()">
-            <!-- ADICIONADO O ONCLICK E O CURSOR AQUI NA IMAGEM -->
             <img id="imgEasterEgg" src="" alt="Surpresa Secreta" onclick="abrirFotoGrande(this.src)" style="cursor: pointer;" title="Clique para ampliar">
-            
             <div id="textoEasterEgg" class="easter-egg-text">Carregando surpresa...</div>
             <div class="easter-egg-buttons">
                 <button class="btn-easter" onclick="sortearEasterEgg()">✨ Outra Surpresa</button>
@@ -158,21 +172,6 @@
             </div>
         </div>
     </div>
-        <!-- MODAL DE ATUALIZAÇÕES / CHANGELOG -->
-    <div id="modalAtualizacoes" class="easter-egg-modal" onclick="fecharModalAtualizacoesFora(event)">
-        <div class="easter-egg-content" style="text-align: left;" onclick="event.stopPropagation()">
-            <h2>✨ O que mudou no Love Ray?</h2>
-            <p style="color: #ccc; margin-bottom: 15px;">Olha só o que o Felipe preparou de novo para ti:</p>
-            <ul id="listaChangelog" style="list-style: none; padding: 0; max-height: 200px; overflow-y: auto; margin-bottom: 15px;">
-                <!-- Preenchido automaticamente via JS -->
-            </ul>
-            <div class="easter-egg-buttons">
-                <button class="btn-easter" onclick="fecharModalAtualizacoes()" style="width: 100%;">Tudo Lido, Te Amo! ❤️</button>
-            </div>
-        </div>
-    </div>
-    
-    
 
     <!-- SCRIPT SEPARADO -->
     <script src="script.js"></script>
