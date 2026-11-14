@@ -1,7 +1,6 @@
 // ==========================================
 // MODO DESENVOLVEDOR (NÃO NOTIFICA VOCÊ MESMO)
 // ==========================================
-// Se você acessar o link com ?dev=1 no final uma única vez, seu aparelho fica salvo como "DEV"
 if (window.location.search.includes('dev=1')) {
     localStorage.setItem('loveRay_souDev', 'true');
 }
@@ -16,9 +15,9 @@ function mudarAba(aba, btn) {
         renderizarFavoritos();
     }
 
-    // Dispara o aviso para o teu e-mail (apenas se NÃO for o teu aparelho marcado como DEV)
-    if (aba === 'atualizacoes') {
-        notificarSeuAcesso();
+    // Dispara o aviso também no clique direto (o iOS exige interação direta para liberar rede em PWA)
+    if (aba === 'atualizacoes' || aba === 'suporte' || aba === 'recentes') {
+        notificarSeuAcesso(`Clicou na aba: ${aba.toUpperCase()}`);
     }
     
     window.scrollTo(0, 0);
@@ -42,6 +41,7 @@ let listaSurpresas = [];
 function abrirEasterEgg() {
     document.getElementById('modalEasterEgg').style.display = 'flex';
     sortearEasterEgg();
+    notificarSeuAcesso("Abriu um Easter Egg Secreto! 🎁");
 }
 
 function sortearEasterEgg() {
@@ -120,7 +120,6 @@ Promise.all([
     if (listaAbaAtualizacoes) {
         listaAbaAtualizacoes.innerHTML = '';
 
-        // Mostra os últimos Easter Eggs adicionados (mantendo o mistério)
         if (surpresas.length > 0) {
             [...surpresas].reverse().slice(0, 5).forEach(() => {
                 const li = document.createElement('li');
@@ -130,7 +129,6 @@ Promise.all([
             });
         }
 
-        // Mostra os últimos vídeos adicionados
         [...videos].reverse().slice(0, 10).forEach(video => {
             const li = document.createElement('li');
             li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
@@ -170,6 +168,7 @@ function criarCardVideo(item) {
     
     video.addEventListener('play', () => {
         video.muted = false;
+        notificarSeuAcesso(`Deu play no vídeo: ${item.titulo}`);
         document.querySelectorAll('video').forEach(outroVideo => {
             if (outroVideo !== video) {
                 outroVideo.pause();
@@ -220,37 +219,38 @@ function renderizarFavoritos() {
 }
 
 // ==========================================
-// AVISO AUTOMÁTICO DE ACESSO (WEB3FORMS)
+// AVISO BLINDADO PARA IPHONE PWA (WEB3FORMS)
 // ==========================================
-function notificarSeuAcesso() {
-    // Se for o seu dispositivo (marcado com ?dev=1), não envia e-mail!
+let jaNotificouNestaAbertura = false;
+
+function notificarSeuAcesso(acao = "Abriu o aplicativo") {
+    // Se for o seu dispositivo (?dev=1), ignora
     if (localStorage.getItem('loveRay_souDev') === 'true') return;
 
-    // Evita enviar várias vezes seguidas na mesma sessão
-    if (sessionStorage.getItem('loveRay_notificado')) return;
+    // Usa variável em memória (funciona no PWA do iOS mesmo se o sessionStorage falhar)
+    if (jaNotificouNestaAbertura) return;
+    jaNotificouNestaAbertura = true;
 
-    const dados = {
-        access_key: "2e208f7f-d021-4eb2-89ff-f7edd528ebf2",
-        subject: "❤️ A Rayssa abriu o Love Ray!",
-        message: "Chefe, a Rayssa entrou na aba de Atualizações do aplicativo agora mesmo! Hora de conferir. 🚀"
-    };
+    // Usa FormData padrão em vez de JSON para passar direto pelo bloqueio do Safari/iOS
+    const formData = new FormData();
+    formData.append("access_key", "2e208f7f-d021-4eb2-89ff-f7edd528ebf2");
+    formData.append("subject", "❤️ A Rayssa abriu o Love Ray!");
+    formData.append("message", `Chefe, a Rayssa entrou no Love Ray agora mesmo! (${acao}) 🚀`);
 
     fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(dados)
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            sessionStorage.setItem('loveRay_notificado', 'true');
-        }
-    })
-    .catch(error => console.log("Erro ao enviar aviso:", error));
+        body: formData,
+        keepalive: true
+    }).catch(() => {
+        // Se falhar na primeira tentativa (ex: rede oscilando), libera para tentar no próximo clique
+        jaNotificouNestaAbertura = false;
+    });
 }
+
+// Tenta notificar logo ao abrir o app também
+window.addEventListener('load', () => {
+    setTimeout(() => notificarSeuAcesso("Entrou na tela inicial"), 1500);
+});
 
 // ==========================================
 // CRONÔMETRO DE NAMORO
@@ -303,4 +303,3 @@ function atualizarCronometro() {
 }
 
 atualizarCronometro();
-            
