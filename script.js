@@ -15,7 +15,6 @@ function mudarAba(aba, btn) {
         renderizarFavoritos();
     }
 
-    // Dispara o aviso também no clique direto (o iOS exige interação direta para liberar rede em PWA)
     if (aba === 'atualizacoes' || aba === 'suporte' || aba === 'recentes') {
         notificarSeuAcesso(`Clicou na aba: ${aba.toUpperCase()}`);
     }
@@ -115,24 +114,42 @@ Promise.all([
     const ultimosRecentes = [...videos].reverse().slice(0, 5);
     ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
     
-    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (EASTER EGGS + VÍDEOS)
+    // 3. PREENCHE A ABA DE ATUALIZAÇÕES (COM DIA E HORA)
     const listaAbaAtualizacoes = document.getElementById('listaAbaAtualizacoes');
     if (listaAbaAtualizacoes) {
         listaAbaAtualizacoes.innerHTML = '';
 
+        // Easter Eggs com data e hora (se preenchido no surpresas.json)
         if (surpresas.length > 0) {
-            [...surpresas].reverse().slice(0, 5).forEach(() => {
+            [...surpresas].reverse().slice(0, 5).forEach(item => {
+                const tagData = item.data 
+                    ? `<span style="display: block; font-size: 11px; color: #ff4d94; margin-bottom: 4px;">🕒 Adicionado em: ${item.data}</span>` 
+                    : '';
+
                 const li = document.createElement('li');
                 li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,42,133,0.3); font-size: 14px; color: #ff85b3;";
-                li.innerHTML = `🎁 <b>Novo Easter Egg Secreto!</b><br><span style="font-size: 12px; color: #ccc;">Uma nova surpresa escondida foi adicionada na aba Suporte. Vai lá procurar! 👀✨</span>`;
+                li.innerHTML = `
+                    ${tagData}
+                    🎁 <b>Novo Easter Egg Secreto!</b><br>
+                    <span style="font-size: 12px; color: #ccc;">Uma nova surpresa escondida foi adicionada na aba Suporte. Vai lá procurar! 👀✨</span>
+                `;
                 listaAbaAtualizacoes.appendChild(li);
             });
         }
 
+        // Vídeos com data e hora (se preenchido no videos.json)
         [...videos].reverse().slice(0, 10).forEach(video => {
+            const tagData = video.data 
+                ? `<span style="display: block; font-size: 11px; color: #ff4d94; margin-bottom: 4px;">🕒 Subido em: ${video.data}</span>` 
+                : '';
+
             const li = document.createElement('li');
             li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
-            li.innerHTML = `🚀 <b>${video.titulo}</b><br><span style="font-size: 12px; color: #aaa;">${video.descricao}</span>`;
+            li.innerHTML = `
+                ${tagData}
+                🚀 <b>${video.titulo}</b><br>
+                <span style="font-size: 12px; color: #aaa;">${video.descricao}</span>
+            `;
             listaAbaAtualizacoes.appendChild(li);
         });
     }
@@ -224,14 +241,11 @@ function renderizarFavoritos() {
 let jaNotificouNestaAbertura = false;
 
 function notificarSeuAcesso(acao = "Abriu o aplicativo") {
-    // Se for o seu dispositivo (?dev=1), ignora
     if (localStorage.getItem('loveRay_souDev') === 'true') return;
 
-    // Usa variável em memória (funciona no PWA do iOS mesmo se o sessionStorage falhar)
     if (jaNotificouNestaAbertura) return;
     jaNotificouNestaAbertura = true;
 
-    // Usa FormData padrão em vez de JSON para passar direto pelo bloqueio do Safari/iOS
     const formData = new FormData();
     formData.append("access_key", "2e208f7f-d021-4eb2-89ff-f7edd528ebf2");
     formData.append("subject", "❤️ A Rayssa abriu o Love Ray!");
@@ -242,12 +256,10 @@ function notificarSeuAcesso(acao = "Abriu o aplicativo") {
         body: formData,
         keepalive: true
     }).catch(() => {
-        // Se falhar na primeira tentativa (ex: rede oscilando), libera para tentar no próximo clique
         jaNotificouNestaAbertura = false;
     });
 }
 
-// Tenta notificar logo ao abrir o app também
 window.addEventListener('load', () => {
     setTimeout(() => notificarSeuAcesso("Entrou na tela inicial"), 1500);
 });
