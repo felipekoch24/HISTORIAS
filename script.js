@@ -1,18 +1,16 @@
-// ==========================================
-// CONFIGURAÇÃO DO CHANGELOG / ATUALIZAÇÕES
-// ==========================================
-// Mude esta chave sempre que adicionar capítulos novos e quiser que o aviso apareça para ela de novo
-const VERSAO_ATUALIZACAO = "v91-legendary-love";
-
 function mudarAba(aba, btn) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('aba-' + aba).classList.add('active');
     
-    // Se clicar na aba de favoritos, atualiza a lista
     if (aba === 'favoritos') {
         renderizarFavoritos();
+    }
+
+    // Se ela abrir a aba de atualizações, dispara o aviso para o teu e-mail
+    if (aba === 'atualizacoes') {
+        notificarSeuAcesso();
     }
     
     window.scrollTo(0, 0);
@@ -103,12 +101,23 @@ fetch('videos.json')
         // Renderiza todos os vídeos no feed principal
         videos.forEach(item => container.appendChild(criarCardVideo(item)));
         
-        // ABA RECENTES: Mostra os últimos 5 lançamentos (ajustável se quiseres mais ou menos)
+        // ABA RECENTES: Mostra os últimos 5 lançamentos
         const ultimosRecentes = [...videos].reverse().slice(0, 5);
         ultimosRecentes.forEach(item => recentContainer.appendChild(criarCardVideo(item)));
         
+        // PREENCHE A ABA DE ATUALIZAÇÕES AUTOMATICAMENTE
+        const listaAbaAtualizacoes = document.getElementById('listaAbaAtualizacoes');
+        if (listaAbaAtualizacoes) {
+            listaAbaAtualizacoes.innerHTML = '';
+            [...videos].reverse().slice(0, 10).forEach(video => {
+                const li = document.createElement('li');
+                li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
+                li.innerHTML = `🚀 <b>${video.titulo}</b><br><span style="font-size: 12px; color: #aaa;">${video.descricao}</span>`;
+                listaAbaAtualizacoes.appendChild(li);
+            });
+        }
+
         renderizarFavoritos();
-        verificarAtualizacoes(ultimosRecentes);
     });
 
 function criarCardVideo(item) {
@@ -189,38 +198,33 @@ function renderizarFavoritos() {
 }
 
 // ==========================================
-// SISTEMA DE MODAL DE ATUALIZAÇÕES
+// AVISO AUTOMÁTICO DE ACESSO (WEB3FORMS)
 // ==========================================
-function verificarAtualizacoes(ultimosVideos) {
-    const listaChangelog = document.getElementById('listaChangelog');
-    if (!listaChangelog) return;
+function notificarSeuAcesso() {
+    // Evita enviar várias vezes na mesma sessão (para não lotar o teu e-mail)
+    if (sessionStorage.getItem('loveRay_notificado')) return;
 
-    listaChangelog.innerHTML = '';
-    
-    // Pega os 3 vídeos mais recentes para listar o que mudou no changelog
-    ultimosVideos.slice(0, 3).forEach(video => {
-        const li = document.createElement('li');
-        li.style.cssText = "margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
-        li.innerHTML = `🚀 <b>${video.titulo}</b><br><span style="font-size: 12px; color: #aaa;">${video.descricao}</span>`;
-        listaChangelog.appendChild(li);
-    });
+    const dados = {
+        access_key: "2e208f7f-d021-4eb2-89ff-f7edd528ebf2", // Chave inserida com sucesso!
+        subject: "❤️ A Rayssa abriu o Love Ray!",
+        message: "Chefe, a Rayssa entrou na aba de Atualizações do aplicativo agora mesmo! Hora de conferir. 🚀"
+    };
 
-    // Se ela ainda não viu esta versão, abre o modal automaticamente
-    const ultimaVersaoVista = localStorage.getItem('loveRay_versao');
-    if (ultimaVersaoVista !== VERSAO_ATUALIZACAO) {
-        document.getElementById('modalAtualizacoes').style.display = 'flex';
-    }
-}
-
-function fecharModalAtualizacoes() {
-    document.getElementById('modalAtualizacoes').style.display = 'none';
-    localStorage.setItem('loveRay_versao', VERSAO_ATUALIZACAO);
-}
-
-function fecharModalAtualizacoesFora(e) {
-    if (e.target.id === 'modalAtualizacoes') {
-        fecharModalAtualizacoes();
-    }
+    fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(dados)
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            sessionStorage.setItem('loveRay_notificado', 'true');
+        }
+    })
+    .catch(error => console.log("Erro ao enviar aviso:", error));
 }
 
 // ==========================================
@@ -273,5 +277,6 @@ function atualizarCronometro() {
     }
 }
 
-// Executar assim que o site abrir
+// Executar cronômetro assim que abrir
 atualizarCronometro();
+            
