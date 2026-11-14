@@ -158,6 +158,20 @@
             </div>
         </div>
     </div>
+        <!-- MODAL DE ATUALIZAÇÕES / CHANGELOG -->
+    <div id="modalAtualizacoes" class="easter-egg-modal" onclick="fecharModalAtualizacoesFora(event)">
+        <div class="easter-egg-content" style="text-align: left;" onclick="event.stopPropagation()">
+            <h2>✨ O que mudou no Love Ray?</h2>
+            <p style="color: #ccc; margin-bottom: 15px;">Olha só o que o Felipe preparou de novo para ti:</p>
+            <ul id="listaChangelog" style="list-style: none; padding: 0; max-height: 200px; overflow-y: auto; margin-bottom: 15px;">
+                <!-- Preenchido automaticamente via JS -->
+            </ul>
+            <div class="easter-egg-buttons">
+                <button class="btn-easter" onclick="fecharModalAtualizacoes()" style="width: 100%;">Tudo Lido, Te Amo! ❤️</button>
+            </div>
+        </div>
+    </div>
+    
     
 
     <!-- SCRIPT SEPARADO -->
