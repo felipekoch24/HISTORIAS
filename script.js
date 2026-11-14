@@ -159,24 +159,6 @@ Promise.all([
             listaAbaAtualizacoes.appendChild(li);
         });
     }
-    
-
-        // Vídeos com data e hora
-        [...videos].reverse().slice(0, 10).forEach(video => {
-            const tagData = video.data 
-                ? `<span style="display: block; font-size: 11px; color: #ff4d94; margin-bottom: 4px;">🕒 Subido em: ${video.data}</span>` 
-                : '';
-
-            const li = document.createElement('li');
-            li.style.cssText = "margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: #fff;";
-            li.innerHTML = `
-                ${tagData}
-                🚀 <b>${video.titulo}</b><br>
-                <span style="font-size: 12px; color: #aaa;">${video.descricao}</span>
-            `;
-            listaAbaAtualizacoes.appendChild(li);
-        });
-    }
 
     renderizarFavoritos();
 });
