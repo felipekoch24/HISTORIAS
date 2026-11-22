@@ -9,6 +9,17 @@
     <link rel="icon" type="image/png" href="icone.png">
     <link rel="apple-touch-icon" href="icone.png">
 
+    <!-- ONESIGNAL WEB PUSH SDK -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "abd27791-f9de-4423-81bd-44782bcda478",
+        });
+      });
+    </script>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
